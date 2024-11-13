@@ -24,7 +24,7 @@ const items = new Array(15).fill(null).map((_, index) => ({
   label: `nav ${index + 1}`,
 }));
 
-const CoreLayout = async ({ children }: React.PropsWithChildren) => {
+const CoreLayout = ({ children }: React.PropsWithChildren) => {
   const { mode, setMode } = useContext(ColorModeContext);
 
   const {
