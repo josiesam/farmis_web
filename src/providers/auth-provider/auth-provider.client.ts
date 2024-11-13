@@ -2,15 +2,15 @@
 
 import { AppwriteException } from "@refinedev/appwrite";
 import type { AuthProvider } from "@refinedev/core";
-import { appwriteAccount, appwriteClient } from "@utils/appwrite/client";
-import { APPWRITE_JWT_KEY } from "@utils/constants";
+import { appwriteAccount, appWriteAvatar, appwriteClient } from "@utils/appwrite/client";
+import { APPWRITE_JWT_KEY } from '@constants/appWrite'
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 
 export const authProviderClient: AuthProvider = {
   login: async ({ email, password }) => {
     try {
-      Cookies.remove(APPWRITE_JWT_KEY, { path: "/" });
+      Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
       appwriteClient.setJWT("");
 
       await appwriteAccount.createEmailPasswordSession(email, password);
@@ -18,7 +18,7 @@ export const authProviderClient: AuthProvider = {
       appwriteClient.setJWT(jwt);
 
       if (jwt) {
-        Cookies.set(APPWRITE_JWT_KEY, jwt, {
+        Cookies.set(APPWRITE_JWT_KEY!, jwt, {
           expires: 30, // 30 days
           path: "/",
         });
@@ -44,7 +44,7 @@ export const authProviderClient: AuthProvider = {
       await appwriteAccount.deleteSessions();
     } catch (error) {}
 
-    Cookies.remove(APPWRITE_JWT_KEY, { path: "/" });
+    Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
     appwriteClient.setJWT("");
     return {
       success: true,
@@ -76,7 +76,7 @@ export const authProviderClient: AuthProvider = {
     return { error };
   },
   check: async () => {
-    const appwriteJWT = Cookies.get(APPWRITE_JWT_KEY);
+    const appwriteJWT = Cookies.get(APPWRITE_JWT_KEY!);
     if (appwriteJWT) {
       appwriteClient.setJWT(appwriteJWT);
     }
@@ -111,9 +111,12 @@ export const authProviderClient: AuthProvider = {
   getPermissions: async () => null,
   getIdentity: async () => {
     const user = await appwriteAccount.get();
+    const userPreferences = await appwriteAccount.getPrefs();
 
     if (user) {
-      return user;
+      const avatar = appWriteAvatar.getInitials()
+      const user_data = {...user, avatar:avatar?.href, username:userPreferences?.username}
+      return user_data;
     }
 
     return null;

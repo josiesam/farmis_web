@@ -1,5 +1,6 @@
 "use client";
 
+import CurrentUser from "@components/current-user";
 import { ColorModeContext } from "@contexts/color-mode";
 import type { RefineThemedLayoutV2HeaderProps } from "@refinedev/antd";
 import { useGetIdentity } from "@refinedev/core";
@@ -19,6 +20,7 @@ const { useToken } = theme;
 type IUser = {
   id: number;
   name: string;
+  username: string;
   avatar: string;
 };
 
@@ -45,7 +47,8 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   }
 
   return (
-    <AntdLayout.Header style={headerStyles}>
+    <AntdLayout.Header title={"FARMIS"} style={headerStyles}>
+
       <Space>
         <Switch
           checkedChildren="🌛"
@@ -54,10 +57,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           defaultChecked={mode === "dark"}
         />
         {(user?.name || user?.avatar) && (
-          <Space style={{ marginLeft: "8px" }} size="middle">
-            {user?.name && <Text strong>{user.name}</Text>}
-            {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
-          </Space>
+          <CurrentUser user={user} />
         )}
       </Space>
     </AntdLayout.Header>
