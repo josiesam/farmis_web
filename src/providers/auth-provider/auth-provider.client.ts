@@ -6,6 +6,7 @@ import { appwriteAccount, appWriteAvatar, appwriteClient } from "@utils/appwrite
 import { APPWRITE_JWT_KEY } from '@constants/appWrite'
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
+import { message } from "antd";
 
 export const authProviderClient: AuthProvider = {
   login: async ({ email, password }) => {
@@ -26,7 +27,7 @@ export const authProviderClient: AuthProvider = {
 
       return {
         success: true,
-        redirectTo: "/",
+        redirectTo: "/dashboard",
       };
     } catch (error) {
       const { type, message, code } = error as AppwriteException;
@@ -51,12 +52,31 @@ export const authProviderClient: AuthProvider = {
       redirectTo: "/login",
     };
   },
-  register: async ({ email, password }) => {
+  register: async ({ email, password, username, name, phone }) => {
     try {
-      await appwriteAccount.create(uuidv4(), email, password);
+      const user = await appwriteAccount.create(uuidv4(), email, password, name);
+      Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
+      appwriteClient.setJWT("");
+
+      await appwriteAccount.createEmailPasswordSession(email, password);
+      const { jwt } = await appwriteAccount.createJWT();
+      appwriteClient.setJWT(jwt);
+
+      if (jwt) {
+        Cookies.set(APPWRITE_JWT_KEY!, jwt, {
+          expires: 30, // 30 days
+          path: "/",
+        });
+      }
+      appwriteAccount.updatePrefs({username})
+      appwriteAccount.createVerification('https://farmis-web.vercel.app/verify-email')
+      message.success('Please check your email to verify your account')
+
+      appwriteAccount.updatePhone(phone, password)
+
       return {
         success: true,
-        redirectTo: "/login",
+        redirectTo: "/dashboard",
       };
     } catch (error) {
       const { type, message, code } = error as AppwriteException;

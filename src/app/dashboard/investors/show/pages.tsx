@@ -1,6 +1,5 @@
-'use client'
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import {
   Card,
@@ -14,8 +13,8 @@ import {
   Button,
   Timeline,
   Radio,
-  UploadProps,
   RadioChangeEvent,
+  UploadProps,
 } from "antd";
 import {
   ToTopOutlined,
@@ -39,29 +38,7 @@ const team3 = "/assets/images/team-3.jpg";
 const team4 = "/assets/images/team-4.jpg";
 const card = "/assets/images/info-card-1.jpg";
 
-interface CountData {
-  today: string;
-  title: string;
-  percent: string;
-  icon: JSX.Element[];
-  bnb: string;
-}
-
-interface ListData {
-  img: string;
-  Title: string;
-  bud: string;
-  progress: JSX.Element;
-  member: JSX.Element;
-}
-
-interface TimelineData {
-  title: string;
-  time: string;
-  color?: string;
-}
-
-function DashboardPage() {
+function Home() {
   const { Title, Text } = Typography;
 
   const onChange = (e:RadioChangeEvent) => console.log(`radio checked:${e.target.value}`);
@@ -154,38 +131,38 @@ function DashboardPage() {
       ></path>
     </svg>,
   ];
-  const count: CountData[] = [
+  const count = [
     {
       today: "Today’s Sales",
       title: "$53,000",
-      percent: "+30%",
+      persent: "+30%",
       icon: dollor,
       bnb: "bnb2",
     },
     {
       today: "Today’s Users",
       title: "3,200",
-      percent: "+20%",
+      persent: "+20%",
       icon: profile,
       bnb: "bnb2",
     },
     {
       today: "New Clients",
       title: "+1,200",
-      percent: "-20%",
+      persent: "-20%",
       icon: heart,
       bnb: "redtext",
     },
     {
       today: "New Orders",
       title: "$13,200",
-      percent: "10%",
+      persent: "10%",
       icon: cart,
       bnb: "bnb2",
     },
   ];
 
-  const list: ListData[] = [
+  const list = [
     {
       img: ava1,
       Title: "Soft UI Shopify Version",
@@ -307,7 +284,7 @@ function DashboardPage() {
     },
   ];
 
-  const timelineList: TimelineData[] = [
+  const timelineList = [
     {
       title: "$2,400 - Redesign store",
       time: "09 JUN 7:20 PM",
@@ -343,6 +320,7 @@ function DashboardPage() {
     headers: {
       authorization: "authorization-text",
     },
+
     onChange(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -375,7 +353,7 @@ function DashboardPage() {
                     <Col xs={18}>
                       <span>{c.today}</span>
                       <Title level={3}>
-                        {c.title} <small className={c.bnb}>{c.percent}</small>
+                        {c.title} <small className={c.bnb}>{c.persent}</small>
                       </Title>
                     </Col>
                     <Col xs={6}>
@@ -540,7 +518,7 @@ function DashboardPage() {
                   xl={10}
                   className="col-img"
                 >
-                  <div className="ant-cret text-right">
+                  <div className="ant-cret" style={{ textAlign: "left" }}>
                     <img src={card} alt="" className="border10" />
                   </div>
                 </Col>
@@ -573,4 +551,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage;
+export default Home;

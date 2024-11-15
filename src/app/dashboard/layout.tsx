@@ -1,5 +1,6 @@
 "use server";
 
+import DashboardLayout from "@components/dashboard-layout";
 import { Header } from "@components/header";
 import { authProviderServer } from "@providers/auth-provider";
 import { ThemedLayoutV2} from "@refinedev/antd";
@@ -13,10 +14,11 @@ export default async function Layout({ children }: React.PropsWithChildren) {
     return redirect(data?.redirectTo || "/login");
   }
 
+
   return (
-    <ThemedLayoutV2 Header={Header}>
+    <DashboardLayout>
       {children}
-    </ThemedLayoutV2>
+    </DashboardLayout>
   );
 }
 

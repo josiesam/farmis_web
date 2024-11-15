@@ -1,6 +1,7 @@
-import { AuthPage } from "@components/auth-page";
-import { authProviderServer } from "@providers/auth-provider";
+// `app/register/page.tsx` - Server Component
 import { redirect } from "next/navigation";
+import { authProviderServer } from "@providers/auth-provider";
+import RegisterAuthPage from "./RegisterAuthPage"; // Client Component for AuthPage
 
 export default async function Register() {
   const data = await getData();
@@ -9,7 +10,7 @@ export default async function Register() {
     redirect(data?.redirectTo || "/");
   }
 
-  return <AuthPage type="register" />;
+  return <RegisterAuthPage />;
 }
 
 async function getData() {
