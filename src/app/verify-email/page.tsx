@@ -65,7 +65,7 @@ const EmailVerificationPage: React.FC = () => {
       ) : (
         <>
           <Title level={3}>Verification Failed</Title>
-          <Text type="danger">We couldn't verify your email. The verification link may have expired or is invalid.</Text>
+          <Text type="danger">We could not verify your email. The verification link may have expired or is invalid.</Text>
           <Button type="primary" onClick={goToHomePage} style={{ marginTop: 20 }}>
             Go to Home
           </Button>
