@@ -1,3 +1,4 @@
+import { ApexOptions } from "apexcharts";
 const lineChart = {
   series: [
     {
@@ -81,7 +82,7 @@ const lineChart = {
         },
       },
     },
-  },
+  } as ApexOptions,
 };
 
 export default lineChart;
