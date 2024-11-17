@@ -24,9 +24,12 @@ import {
 } from "@ant-design/icons";
 import Paragraph from "antd/lib/typography/Paragraph";
 
-import Echart from "@components/chart/EChart";
-import LineChart from "@components/chart/LineCharts";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+
+const EChart = dynamic(() => import("@components/chart/EChart"), {ssr: false})
+const LineChart = dynamic(() => import("@components/chart/LineCharts"), {ssr: false})
+
 
 const ava1 = "/assets/images/logo-shopify.svg";
 const ava2 = "/assets/images/logo-atlassian.svg";
@@ -392,7 +395,7 @@ function DashboardPage() {
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
-              <Echart />
+              <EChart />
             </Card>
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
