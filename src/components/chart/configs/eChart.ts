@@ -1,3 +1,4 @@
+import { ApexOptions } from "apexcharts";
 const eChart = {
   series: [
     {
@@ -100,7 +101,7 @@ const eChart = {
         },
       },
     },
-  },
+  } as ApexOptions,
 };
 
 export default eChart;
