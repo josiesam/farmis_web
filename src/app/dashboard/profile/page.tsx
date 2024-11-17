@@ -367,7 +367,7 @@ function Profile() {
               onChange={handleChange}
             >
               {imageURL ? (
-                <Image src={imageURL} width={0} height={0} alt="avatar" style={{ width: "100%" }} />
+                <Image src={""} width={0} height={0} alt="avatar" style={{ width: "100%" }} />
               ) : (
                 uploadButton
               )}

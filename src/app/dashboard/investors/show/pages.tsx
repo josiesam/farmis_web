@@ -25,6 +25,7 @@ import Paragraph from "antd/lib/typography/Paragraph";
 
 import Echart from "@components/chart/EChart";
 import LineChart from "@components/chart/LineCharts";
+import Image from "next/image";
 
 const ava1 = "/assets/images/logo-shopify.svg";
 const ava2 = "/assets/images/logo-atlassian.svg";
@@ -171,16 +172,16 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team2} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team3} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Jessica Doe">
-            <img className="tootip-img" src={team4} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team4} alt="" />
           </Tooltip>
         </div>
       ),
@@ -193,10 +194,10 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -209,13 +210,13 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team3} alt="" />
           </Tooltip>
         </div>
       ),
@@ -228,10 +229,10 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -244,16 +245,16 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team2} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team3} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Jessica Doe">
-            <img className="tootip-img" src={team4} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team4} alt="" />
           </Tooltip>
         </div>
       ),
@@ -274,10 +275,10 @@ function Home() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image width={0} height={0} className="tootip-img" src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -414,7 +415,9 @@ function Home() {
                       <tr key={index}>
                         <td>
                           <h6>
-                            <img
+                            <Image
+                              width={0}
+                              height={0}
                               src={d.img}
                               alt=""
                               className="avatar-sm mr-10"
@@ -519,7 +522,7 @@ function Home() {
                   className="col-img"
                 >
                   <div className="ant-cret" style={{ textAlign: "left" }}>
-                    <img src={card} alt="" className="border10" />
+                    <Image width={0} height={0} src={card} alt="" className="border10" />
                   </div>
                 </Col>
               </Row>
