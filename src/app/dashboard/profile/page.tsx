@@ -23,6 +23,7 @@ import {
   TwitterOutlined,
   InstagramOutlined,
   VerticalAlignTopOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 
 const BgProfile = "/assets/images/bg-profile.jpg";
@@ -84,26 +85,6 @@ function Profile() {
       });
     }
   };
-
-  const pencil = [
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      key={0}
-    >
-      <path
-        d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z"
-        className="fill-gray-7"
-      ></path>
-      <path
-        d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z"
-        className="fill-gray-7"
-      ></path>
-    </svg>,
-  ];
 
   const uploadButton = (
     <div className="ant-upload-text font-semibold text-dark">
@@ -254,7 +235,7 @@ function Profile() {
             bordered={false}
             title={<h6 className="font-semibold m-0">Profile Information</h6>}
             className="header-solid h-full card-profile-information"
-            extra={<Button type="link">{pencil}</Button>}
+            extra={<Button type="link">{<EditOutlined />}</Button>}
             styles={{ body:{paddingTop: 0, paddingBottom: 16}  }}
           >
             <p className="text-dark">
@@ -305,7 +286,7 @@ function Profile() {
               split={false}
               className="conversations-list"
               renderItem={(item) => (
-                <List.Item actions={[<Button type="link">REPLY</Button>]}>
+                <List.Item key={item.title} actions={[<Button key={0} type="link">REPLY</Button>]}>
                   <List.Item.Meta
                     avatar={
                       <Avatar shape="square" size={48} src={item.avatar} />
