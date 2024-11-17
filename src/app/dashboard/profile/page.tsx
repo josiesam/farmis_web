@@ -15,6 +15,7 @@ import {
   Upload,
   message,
   UploadProps,
+  Image,
 } from "antd";
 
 import {
@@ -334,7 +335,7 @@ function Profile() {
               <Card
                 bordered={false}
                 className="card-project"
-                cover={<img alt="example" src={p.img} />}
+                cover={<Image alt="example" width={0} height={0} src={p.img} />}
               >
                 <div className="card-tag">{p.titlesub}</div>
                 <h5>{p.title}</h5>
@@ -366,7 +367,7 @@ function Profile() {
               onChange={handleChange}
             >
               {imageURL ? (
-                <img src={imageURL} alt="avatar" style={{ width: "100%" }} />
+                <Image src={imageURL} width={0} height={0} alt="avatar" style={{ width: "100%" }} />
               ) : (
                 uploadButton
               )}

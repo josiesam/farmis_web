@@ -3,7 +3,7 @@
 
 import React, { useImperativeHandle, useRef, useState } from "react";
 import { AuthPage } from "@components/auth-page";
-import { Button, Card, Form, Input, theme, Typography } from "antd";
+import { Button, Card, Form, Input, Select, theme, Typography } from "antd";
 import {
   useActiveAuthProvider,
   useLink,
@@ -19,12 +19,13 @@ export interface RegisterFormTypes {
   username?: string;
   phone?: string;
   name?: string;
+  gender?: string;
+  userType?: string;
   providerName?: string;
 }
 
 const { Title } = Typography;
-
-
+const { Option } = Select;
 
 const RegisterAuthPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -148,6 +149,25 @@ const RegisterAuthPage: React.FC = () => {
               </Form.Item>
 
               <Form.Item
+                name="gender"
+                label={translate("pages.register.gender", "Gender")}
+                rules={[
+                  {
+                    required: true,
+                    message: translate(
+                      "pages.register.errors.gender",
+                      "Email is required"
+                    ),
+                  },
+                ]}
+              >
+                <Select placeholder="Select a option and change input text above">
+                  <Option value="male">male</Option>
+                  <Option value="female">female</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
                 name="email"
                 label={translate("pages.register.email", "Email")}
                 rules={[
@@ -212,6 +232,19 @@ const RegisterAuthPage: React.FC = () => {
                 ]}
               >
                 <Input type="password" placeholder="●●●●●●●●" size="large" />
+              </Form.Item>
+
+              <Form.Item
+                name="userType"
+                label={translate("pages.register.userType", "User Type")}
+                rules={[
+                ]}
+              >
+                <Select allowClear placeholder="Select a user type (leave blank for base user)">
+                  <Option value="farmer">Farmer</Option>
+                  <Option value="investor">Investor</Option>
+                  <Option value="stakeholder">Stakeholder (NGO, Gov, Leader)</Option>
+                </Select>
               </Form.Item>
 
               <div

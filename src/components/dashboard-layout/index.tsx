@@ -1,7 +1,7 @@
 'use client'
 
-import { Header } from "@components/header";
-import { ThemedLayoutV2, ThemedTitleV2 } from "@refinedev/antd";
+// import { Header } from "@components/header";
+import { Header, ThemedLayoutV2, ThemedTitleV2 } from "@refinedev/antd";
 import React from "react";
 
 type Props = {};

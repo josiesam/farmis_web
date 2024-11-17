@@ -26,6 +26,7 @@ import Paragraph from "antd/lib/typography/Paragraph";
 
 import Echart from "@components/chart/EChart";
 import LineChart from "@components/chart/LineCharts";
+import Image from "next/image";
 
 const ava1 = "/assets/images/logo-shopify.svg";
 const ava2 = "/assets/images/logo-atlassian.svg";
@@ -194,16 +195,16 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team2} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team3} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Jessica Doe">
-            <img className="tootip-img" src={team4} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team4} alt="" />
           </Tooltip>
         </div>
       ),
@@ -216,10 +217,10 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -232,13 +233,13 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team3} alt="" />
           </Tooltip>
         </div>
       ),
@@ -251,10 +252,10 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -267,16 +268,16 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team2} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Alexander Smith">
-            <img className="tootip-img" src={team3} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team3} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Jessica Doe">
-            <img className="tootip-img" src={team4} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team4} alt="" />
           </Tooltip>
         </div>
       ),
@@ -297,10 +298,10 @@ function DashboardPage() {
       member: (
         <div className="avatar-group mt-2">
           <Tooltip placement="bottom" title="Ryan Tompson">
-            <img className="tootip-img" src={team1} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team1} alt="" />
           </Tooltip>
           <Tooltip placement="bottom" title="Romina Hadid">
-            <img className="tootip-img" src={team2} alt="" />
+            <Image className="tootip-img" width={0} height={0} src={team2} alt="" />
           </Tooltip>
         </div>
       ),
@@ -436,10 +437,12 @@ function DashboardPage() {
                       <tr key={index}>
                         <td>
                           <h6>
-                            <img
+                            <Image
                               src={d.img}
                               alt=""
                               className="avatar-sm mr-10"
+                              width={0}
+                              height={0}
                             />{" "}
                             {d.Title}
                           </h6>
@@ -541,7 +544,7 @@ function DashboardPage() {
                   className="col-img"
                 >
                   <div className="ant-cret text-right">
-                    <img src={card} alt="" className="border10" />
+                    <Image src={card} width={0} height={0} alt="" className="border10" />
                   </div>
                 </Col>
               </Row>

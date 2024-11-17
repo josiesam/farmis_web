@@ -52,7 +52,7 @@ export const authProviderClient: AuthProvider = {
       redirectTo: "/login",
     };
   },
-  register: async ({ email, password, username, name, phone }) => {
+  register: async ({ email, password, username, name, phone, userType, gender }) => {
     try {
       const user = await appwriteAccount.create(uuidv4(), email, password, name);
       Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
@@ -68,10 +68,10 @@ export const authProviderClient: AuthProvider = {
           path: "/",
         });
       }
-      appwriteAccount.updatePrefs({username})
+      appwriteAccount.updatePrefs({username, userType, gender})
       appwriteAccount.createVerification('https://farmis-web.vercel.app/verify-email')
       message.success('Please check your email to verify your account')
-
+          
       appwriteAccount.updatePhone(phone, password)
 
       return {
