@@ -1,7 +1,7 @@
 import { ResourceProps } from '@refinedev/core'
 
-import { CROPS_COLLECTION_ID, FARMERS_COLLECTION_ID, FUNDING_PROJECTS_COLLECTION_ID, FUNDING_REPORTS_COLLECTION_ID, INVENTORIES_COLLECTION_ID, INVESTORS_COLLECTION_ID, LOCATIONS_COLLECTION_ID, ORDERS_COLLECTION_ID, PRODUCTS_COLLECTION_ID, RESEARCH_ARCHIVES_COLLECTION_ID, STAKEHOLDERS_COLLECTION_ID, TRANSACTIONS_COLLECTION_ID } from "./appWrite";
-import { AuditOutlined, DashboardOutlined, DatabaseOutlined, DollarCircleOutlined, FundProjectionScreenOutlined, FundViewOutlined, SettingOutlined, ShopOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { CROPS_COLLECTION_ID, EVENTS_COLLECTION_ID, FARMERS_COLLECTION_ID, FUNDING_PROJECTS_COLLECTION_ID, FUNDING_REPORTS_COLLECTION_ID, INVENTORIES_COLLECTION_ID, INVESTORS_COLLECTION_ID, LOCATIONS_COLLECTION_ID, ORDERS_COLLECTION_ID, PRODUCTS_COLLECTION_ID, RESEARCH_ARCHIVES_COLLECTION_ID, STAKEHOLDERS_COLLECTION_ID, TRANSACTIONS_COLLECTION_ID } from "./appWrite";
+import { AuditOutlined, CalendarOutlined, DashboardOutlined, DatabaseOutlined, DollarCircleOutlined, FundProjectionScreenOutlined, FundViewOutlined, SettingOutlined, ShopOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 export const refineResources: ResourceProps[] = [
   {
@@ -133,7 +133,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'funding_overview',
-    list: '/dashboard',
+    list: '/dashboard/fundings',
     meta: {
       label: 'overview',
       parent: 'fundings'
@@ -141,7 +141,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: FUNDING_PROJECTS_COLLECTION_ID!,
-    list: "/dashboard/projects",
+    list: "/dashboard/fundings/projects",
     meta: {
       canDelete: true,
       label: "projects",
@@ -150,11 +150,25 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: FUNDING_REPORTS_COLLECTION_ID!,
-    list: "/dashboard/reports",
+    list: "/dashboard/funding/reports",
     meta: {
       label: "reports",
       parent: "fundings",
     },
+  },
+  {
+    name: 'events',
+    meta: {
+      label: 'calendar',
+      icons: <CalendarOutlined />
+    }
+  },
+  {
+    name: EVENTS_COLLECTION_ID!,
+    list: '/dashboard/calendar/events',
+    meta: {
+      label: 'events',
+    }
   },
   {
     name: 'profile',
