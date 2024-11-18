@@ -1,13 +1,124 @@
 import React from "react";
+import { useList } from "@refinedev/core";
+import { Layout, Typography, Row, Col, Card, Spin, Space, Button } from "antd";
+import { PRODUCTS_COLLECTION_ID } from "@constants/appWrite";
 
-type Props = {};
+const { Title, Paragraph, Text } = Typography;
 
-const IndexPage = (props: Props) => {
+const Marketplace = () => {
+  // Use Refine's useList hook to fetch marketplace data
+  const { data, isLoading, error } = useList({
+    resource: PRODUCTS_COLLECTION_ID, // This should match the collection name in Appwrite
+  });
+
+  // Handle loading and error states
+  if (isLoading) {
+    return (
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <Spin size="large" />
+        <Text>Loading Products...</Text>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <Text type="danger">Failed to load products. Please try again later.</Text>
+      </div>
+    );
+  }
+
+  // Extract product data
+  const products = data?.data || [];
+
   return (
-    <div style={{ textAlign: "center", fontSize: "2em", fontWeight: 700 }}>
-      Market Place
-    </div>
+    <Layout style={{ backgroundColor: "#f9f9f9", padding: "20px" }}>
+      {/* Hero Section */}
+      <section style={{ background: "#ff9f00", padding: "50px", color: "white" }}>
+        <Title level={2} style={{ textAlign: "center", color: "white" }}>
+          Welcome to the Agricultural Marketplace
+        </Title>
+        <Paragraph style={{ fontSize: "16px", textAlign: "center", maxWidth: "800px", margin: "0 auto" }}>
+          The Agricultural Marketplace is your go-to platform for buying and selling agricultural products. Farmers, 
+          investors, and stakeholders can connect seamlessly, ensuring fair pricing and transparent transactions.
+        </Paragraph>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button type="primary" size="large" href="/add-product">
+            List Your Product
+          </Button>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section style={{ padding: "40px 20px", textAlign: "center" }}>
+        <Title level={3}>Why Use the Agricultural Marketplace?</Title>
+        <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
+          <Col xs={24} sm={12} md={8}>
+            <Card hoverable>
+              <Title level={5}>For Farmers</Title>
+              <Paragraph>
+                Sell your products directly to buyers, ensuring fair prices and reducing the middleman effect.
+              </Paragraph>
+            </Card>
+          </Col>
+          <Col xs={24} sm={12} md={8}>
+            <Card hoverable>
+              <Title level={5}>For Buyers</Title>
+              <Paragraph>
+                Access a wide range of fresh, locally grown produce with detailed information about the seller.
+              </Paragraph>
+            </Card>
+          </Col>
+          <Col xs={24} sm={12} md={8}>
+            <Card hoverable>
+              <Title level={5}>For Stakeholders</Title>
+              <Paragraph>
+                Analyze market trends and facilitate better resource allocation in the agricultural sector.
+              </Paragraph>
+            </Card>
+          </Col>
+        </Row>
+      </section>
+
+      {/* Product Listings Section */}
+      {/* <section style={{ padding: "20px" }}>
+        <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
+          Available Products
+        </Title>
+        <Row gutter={[16, 16]}>
+          {products.map((product) => (
+            <Col key={product.id} xs={24} sm={12} md={8} lg={6}>
+              <Card
+                title={product.name}
+                bordered={true}
+                hoverable
+                style={{ borderColor: "#ff9f00", textAlign: "center" }}
+              >
+                <Space direction="vertical">
+                  <Text>
+                    <strong>Category:</strong> {product.category || "N/A"}
+                  </Text>
+                  <Text>
+                    <strong>Price:</strong> ${product.price || "N/A"}
+                  </Text>
+                  <Text>
+                    <strong>Quantity Available:</strong> {product.quantity || "N/A"}
+                  </Text>
+                  <Text>
+                    <strong>Seller:</strong> {product.seller_name || "Unknown"}
+                  </Text>
+                  <Button type="primary" size="small" href={`/product/${product.id}`}>
+                    View Details
+                  </Button>
+                </Space>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </section> */}
+    </Layout>
   );
 };
 
-export default IndexPage;
+export default Marketplace;
