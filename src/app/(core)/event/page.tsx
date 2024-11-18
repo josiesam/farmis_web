@@ -22,8 +22,13 @@ import { info } from "console";
 
 const { Title, Paragraph, Text } = Typography;
 
+type ListDataType = {
+  type: Required<BadgeProps>["status"]; // Ensures it matches the Badge `status`
+  content: string;
+};
+
 const getListData = (value: Dayjs) => {
-  let listData: { type: string; content: string }[] = [];
+  let listData: ListDataType[] = [];
   switch (value.date()) {
     case 8:
       listData = [

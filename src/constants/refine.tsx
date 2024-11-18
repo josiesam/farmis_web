@@ -94,6 +94,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'marketplace_overview',
+    list: '/dashboard/marketplace',
     meta: {
       label: 'overview',
       parent: 'marketplace'
