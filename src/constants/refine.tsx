@@ -93,6 +93,13 @@ export const refineResources: ResourceProps[] = [
     }
   },
   {
+    name: 'marketplace_overview',
+    meta: {
+      label: 'overview',
+      parent: 'marketplace'
+    }
+  },
+  {
     name: PRODUCTS_COLLECTION_ID!,
     list: 'dashboard/marketplace/products',
     meta: {
@@ -143,7 +150,6 @@ export const refineResources: ResourceProps[] = [
     name: FUNDING_PROJECTS_COLLECTION_ID!,
     list: "/dashboard/fundings/projects",
     meta: {
-      canDelete: true,
       label: "projects",
       parent: "fundings",
     },
@@ -164,10 +170,19 @@ export const refineResources: ResourceProps[] = [
     }
   },
   {
+    name: 'events_overview',
+    list: 'dashboard/calendar',
+    meta: {
+      label: 'overview',
+      parent: 'events'
+    }
+  },
+  {
     name: EVENTS_COLLECTION_ID!,
     list: '/dashboard/calendar/events',
     meta: {
-      label: 'events',
+      label: 'calendar',
+      parent: 'events'
     }
   },
   {

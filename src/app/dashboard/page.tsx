@@ -160,14 +160,14 @@ function DashboardPage() {
   ];
   const count: CountData[] = [
     {
-      today: "Today’s Sales",
+      today: "Month’s Sales",
       title: "$53,000",
       percent: "+30%",
       icon: dollor,
       bnb: "bnb2",
     },
     {
-      today: "Today’s Farmers",
+      today: "Month’s Farmers",
       title: "3,200",
       percent: "+20%",
       icon: profile,
@@ -192,7 +192,7 @@ function DashboardPage() {
   const list: ListData[] = [
     {
       img: ava1,
-      Title: "Soft UI Shopify Version",
+      Title: "Funding Project 1",
       bud: "$14,000",
       progress: <Progress percent={60} size="small" />,
       member: (
@@ -214,7 +214,7 @@ function DashboardPage() {
     },
     {
       img: ava2,
-      Title: "Progress Track",
+      Title: "Funding Project 2",
       bud: "$3,000",
       progress: <Progress percent={10} size="small" />,
       member: (
@@ -230,7 +230,7 @@ function DashboardPage() {
     },
     {
       img: ava3,
-      Title: "Fix Platform Errors",
+      Title: "Funding Project 3",
       bud: "Not Set",
       progress: <Progress percent={100} size="small" status="active" />,
       member: (
@@ -249,7 +249,7 @@ function DashboardPage() {
     },
     {
       img: ava4,
-      Title: "Launch new Mobile App",
+      Title: "Funding Project 4",
       bud: "$20,600",
       progress: <Progress percent={100} size="small" status="active" />,
       member: (
@@ -265,7 +265,7 @@ function DashboardPage() {
     },
     {
       img: ava5,
-      Title: "Add the New Landing Page",
+      Title: "Funding Project 5",
       bud: "$4,000",
       progress: <Progress percent={80} size="small" />,
       member: (
@@ -288,7 +288,7 @@ function DashboardPage() {
 
     {
       img: ava6,
-      Title: "Redesign Online Store",
+      Title: "Funding Project 5",
       bud: "$2,000",
       progress: (
         <Progress
@@ -410,7 +410,7 @@ function DashboardPage() {
             <Card bordered={false} className="criclebox cardbody h-full">
               <div className="project-ant">
                 <div>
-                  <Title level={5}>Projects</Title>
+                  <Title level={5}>Fundings</Title>
                   <Paragraph className="lastweek">
                     done this month<span className="blue">40%</span>
                   </Paragraph>
@@ -419,8 +419,9 @@ function DashboardPage() {
                   <div className="antd-pro-pages-dashboard-analysis-style-salesExtra">
                     <Radio.Group onChange={onChange} defaultValue="a">
                       <Radio.Button value="a">ALL</Radio.Button>
-                      <Radio.Button value="b">ONLINE</Radio.Button>
-                      <Radio.Button value="c">STORES</Radio.Button>
+                      <Radio.Button value="b">CROWDFUNDING</Radio.Button>
+                      <Radio.Button value="c">GRANT</Radio.Button>
+                      <Radio.Button value="c">LOAN</Radio.Button>
                     </Radio.Group>
                   </div>
                 </div>
@@ -429,9 +430,9 @@ function DashboardPage() {
                 <table className="width-100">
                   <thead>
                     <tr>
-                      <th>COMPANIES</th>
-                      <th>MEMBERS</th>
-                      <th>BUDGET</th>
+                      <th>PROJECTS</th>
+                      <th>FARMERS</th>
+                      <th>RAISED</th>
                       <th>COMPLETION</th>
                     </tr>
                   </thead>
