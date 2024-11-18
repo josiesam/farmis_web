@@ -155,8 +155,8 @@ const RegisterAuthPage: React.FC = () => {
                   {
                     required: true,
                     message: translate(
-                      "pages.register.errors.gender",
-                      "Email is required"
+                      "pages.register.errors.requiredGender",
+                      "Gender is required"
                     ),
                   },
                 ]}
@@ -240,7 +240,7 @@ const RegisterAuthPage: React.FC = () => {
                 rules={[
                 ]}
               >
-                <Select allowClear placeholder="Select a user type (leave blank for base user)">
+                <Select allowClear placeholder="Select a user type (blank for base user)">
                   <Option value="farmer">Farmer</Option>
                   <Option value="investor">Investor</Option>
                   <Option value="stakeholder">Stakeholder (NGO, Gov, Leader)</Option>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Account, Appwrite, Avatars, Storage } from "@refinedev/appwrite";
+import { Account, Appwrite, Avatars, Storage, Functions, Databases } from "@refinedev/appwrite";
 import {
   APPWRITE_JWT_KEY,
   APPWRITE_PROJECT,
@@ -20,3 +20,5 @@ appwriteClient.setEndpoint(APPWRITE_URL!).setProject(APPWRITE_PROJECT!);
 export const appwriteAccount = new Account(appwriteClient);
 export const appWriteAvatar = new Avatars(appwriteClient)
 export const appwriteStorage = new Storage(appwriteClient);
+export const appwriteFunction = new Functions(appwriteClient);
+export const appwriteDatabase = new Databases(appwriteClient)

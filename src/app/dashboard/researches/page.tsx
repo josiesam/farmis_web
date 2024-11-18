@@ -20,7 +20,8 @@ export default function LocationList() {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
+      <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
+
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}

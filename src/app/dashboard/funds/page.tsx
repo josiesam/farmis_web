@@ -12,7 +12,7 @@ import {
 import { type BaseRecord } from "@refinedev/core";
 import { Space, Table } from "antd";
 
-export default function InventoryList() {
+export default function LocationList() {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
@@ -20,13 +20,16 @@ export default function InventoryList() {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
-        <Table.Column dataIndex={"quantity"} title={"Quantity"} />
-        <Table.Column dataIndex={"product"} title={"Products"} 
-          render={(value:Array<any>) => {
-            console.log(value)
-            return value.length
-          }} />
+        <Table.Column
+          dataIndex="id"
+          title={"ID"}
+          render={(value: any, record: any, index: number) => index + 1}
+        />
+        <Table.Column dataIndex={'region'} title={'Region'} />
+        <Table.Column dataIndex={'district'} title={'District'} />
+        <Table.Column dataIndex={'longitude'} title={'Longitude'} />
+        <Table.Column dataIndex={'latitude'} title={'Latitude'} />
+
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}

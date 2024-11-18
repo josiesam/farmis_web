@@ -2,8 +2,8 @@
 
 import { AppwriteException } from "@refinedev/appwrite";
 import type { AuthProvider } from "@refinedev/core";
-import { appwriteAccount, appWriteAvatar, appwriteClient } from "@utils/appwrite/client";
-import { APPWRITE_JWT_KEY } from '@constants/appWrite'
+import { appwriteAccount, appWriteAvatar, appwriteClient, appwriteDatabase, appwriteFunction } from "@utils/appwrite/client";
+import { APPWRITE_JWT_KEY, AUTH_USERPROFILE_FUNCTION_ID, FARMERS_COLLECTION_ID, INVESTORS_COLLECTION_ID, PROJECT_DATABASE_ID, STAKEHOLDERS_COLLECTION_ID, USERS_COLLECTION_ID } from '@constants/appWrite'
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 import { message } from "antd";
@@ -68,11 +68,56 @@ export const authProviderClient: AuthProvider = {
           path: "/",
         });
       }
-      appwriteAccount.updatePrefs({username, userType, gender})
-      appwriteAccount.createVerification('https://farmis-web.vercel.app/verify-email')
-      message.success('Please check your email to verify your account')
+      await appwriteAccount.updatePrefs({username, userType, gender})
+      await appwriteAccount.createVerification('https://farmis-web.vercel.app/verify-email')
+      message.success('Please check your email for account verification link')
           
-      appwriteAccount.updatePhone(phone, password)
+      await appwriteAccount.updatePhone(phone, password)
+
+
+
+      appwriteDatabase.createDocument(
+        PROJECT_DATABASE_ID!,
+        USERS_COLLECTION_ID!,
+        user.$id,
+        {
+          name,
+          email,
+          phone,
+          gender,
+          user_type: userType
+        }
+    
+      )
+
+      let profile_collection_id
+
+      switch (userType) {
+        case 'farmer':
+          profile_collection_id = FARMERS_COLLECTION_ID!
+          break;
+        case 'investor':
+          profile_collection_id = INVESTORS_COLLECTION_ID!
+          break;
+        case 'stakeholder':
+          profile_collection_id = STAKEHOLDERS_COLLECTION_ID!
+          break;
+      
+        default:
+          break;
+      }
+
+      if (profile_collection_id) {
+        appwriteDatabase.createDocument(
+          PROJECT_DATABASE_ID!,
+          profile_collection_id,
+          user.$id,
+          {
+            user:user.$id
+          }
+        )
+      }
+      
 
       return {
         success: true,
