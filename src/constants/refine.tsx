@@ -1,7 +1,7 @@
 import { ResourceProps } from '@refinedev/core'
 
-import { CROPS_COLLECTION_ID, FARMERS_COLLECTION_ID, FUNDING_PROJECTS_COLLECTION_ID, FUNDING_REPORTS_COLLECTION_ID, INVESTORS_COLLECTION_ID, LOCATIONS_COLLECTION_ID, RESEARCH_ARCHIVES_COLLECTION_ID, STAKEHOLDERS_COLLECTION_ID } from "./appWrite";
-import { AuditOutlined, DashboardOutlined, DatabaseOutlined, DollarCircleOutlined, FundProjectionScreenOutlined, FundViewOutlined, SettingOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { CROPS_COLLECTION_ID, FARMERS_COLLECTION_ID, FUNDING_PROJECTS_COLLECTION_ID, FUNDING_REPORTS_COLLECTION_ID, INVENTORIES_COLLECTION_ID, INVESTORS_COLLECTION_ID, LOCATIONS_COLLECTION_ID, ORDERS_COLLECTION_ID, PRODUCTS_COLLECTION_ID, RESEARCH_ARCHIVES_COLLECTION_ID, STAKEHOLDERS_COLLECTION_ID, TRANSACTIONS_COLLECTION_ID } from "./appWrite";
+import { AuditOutlined, DashboardOutlined, DatabaseOutlined, DollarCircleOutlined, FundProjectionScreenOutlined, FundViewOutlined, SettingOutlined, ShopOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 export const refineResources: ResourceProps[] = [
   {
@@ -10,87 +10,133 @@ export const refineResources: ResourceProps[] = [
     meta: {
       label: 'dashboard',
       icon: <DashboardOutlined />
-    }
+    },
   },
   {
     name: 'accounts',
-    list: '/dashboard/accounts',
     meta: {
       label: 'accounts',
       icon: <TeamOutlined />
     }
   },
   {
-    name: FARMERS_COLLECTION_ID!,
-    list: "/dashboard/farmers",
-    create: "/dashboard/farmers/create",
-    edit: "/dashboard/farmers/edit/:id",
-    show: "/dashboard/farmers/show/:id",
+    name: 'accounts_overview',
+    list: '/dashboard/accounts',
     meta: {
-      canDelete: true,
+      label: 'overview',
+      parent:'accounts'
+    }
+  },
+  {
+    name: FARMERS_COLLECTION_ID!,
+    list: "/dashboard/accounts/farmers",
+    create: "/dashboard/accounts/farmers/create",
+    edit: "/dashboard/accounts/farmers/edit/:id",
+    show: "/dashboard/accounts/farmers/show/:id",
+    meta: {
       label: "farmers",
       parent: "accounts"
     },
   },
   {
-    name: LOCATIONS_COLLECTION_ID!,
-    list: "/dashboard/locations",
-    meta: {
-      canDelete: true,
-      label: "locations",
-      parent: "accounts"
-    },
-  },
-  {
     name: INVESTORS_COLLECTION_ID!,
-    list: "/dashboard/investors",
+    list: "/dashboard/accounts/investors",
     meta: {
-      canDelete: true,
       label: "investors",
       parent: "accounts"
     },
   },
   {
     name: STAKEHOLDERS_COLLECTION_ID!,
-    list: "/dashboard/stakeholders",
+    list: "/dashboard/accounts/stakeholders",
     meta: {
-      canDelete: true,
       label: "stakeholders",
       parent: "accounts"
     },
   },
   {
     name: 'registry',
-    list: '/dashboard/registry',
     meta: {
       label: 'registry',
       icon: <DatabaseOutlined />
     }
   },
   {
-    name: CROPS_COLLECTION_ID!,
-    list: "/dashboard/crops",
+    name: 'registry_overview',
+    list: '/dashboard/registry',
     meta: {
-      canDelete: true,
+      label: 'overview',
+      parent: 'registry'
+    }
+  },
+  {
+    name: CROPS_COLLECTION_ID!,
+    list: "/dashboard/registry/crops",
+    meta: {
       label: "crops",
       parent: "registry"
     },
   },
   {
     name: RESEARCH_ARCHIVES_COLLECTION_ID!,
-    list: "/dashboard/researches",
+    list: "/dashboard/registry/researches",
     meta: {
-      canDelete: true,
       label: "researches",
       parent: "registry"
     },
   },
   {
+    name: 'marketplace',
+    meta: {
+      label:'marketplace',
+      icon: <ShopOutlined />
+    }
+  },
+  {
+    name: PRODUCTS_COLLECTION_ID!,
+    list: 'dashboard/marketplace/products',
+    meta: {
+      label: 'products',
+      parent: 'marketplace'
+    }
+  },
+  {
+    name: ORDERS_COLLECTION_ID!,
+    list: '/dashboard/marketplace/orders',
+    meta: {
+      label: 'orders',
+      parent: 'marketplace'
+    }
+  },
+  {
+    name: TRANSACTIONS_COLLECTION_ID!,
+    list: '/dashboard/marketplace/transactions',
+    meta: {
+      label: 'transactions',
+      parent: 'marketplace'
+    }
+  },
+  {
+    name: INVENTORIES_COLLECTION_ID!,
+    list: '/dashboard/marketplace/inventories',
+    meta: {
+      label: 'inventories',
+      parent: 'marketplace'
+    }
+  },
+  {
     name: 'fundings',
-    list: '/dashboard',
     meta: {
       label: 'fundings',
       icon: <FundViewOutlined />
+    }
+  },
+  {
+    name: 'funding_overview',
+    list: '/dashboard',
+    meta: {
+      label: 'overview',
+      parent: 'fundings'
     }
   },
   {
@@ -106,7 +152,6 @@ export const refineResources: ResourceProps[] = [
     name: FUNDING_REPORTS_COLLECTION_ID!,
     list: "/dashboard/reports",
     meta: {
-      canDelete: true,
       label: "reports",
       parent: "fundings",
     },

@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { useList } from "@refinedev/core";
 import { Layout, Typography, Row, Col, Card, Spin, Space, Button } from "antd";
@@ -33,10 +35,10 @@ const Marketplace = () => {
   const products = data?.data || [];
 
   return (
-    <Layout style={{ backgroundColor: "#f9f9f9", padding: "20px" }}>
+    <Layout style={{ padding: "20px" }}>
       {/* Hero Section */}
-      <section style={{ background: "#ff9f00", padding: "50px", color: "white" }}>
-        <Title level={2} style={{ textAlign: "center", color: "white" }}>
+      <section style={{ padding: "50px"}}>
+        <Title level={2} style={{ textAlign: "center"}}>
           Welcome to the Agricultural Marketplace
         </Title>
         <Paragraph style={{ fontSize: "16px", textAlign: "center", maxWidth: "800px", margin: "0 auto" }}>

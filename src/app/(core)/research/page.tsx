@@ -1,13 +1,16 @@
+'use client';
+
 import React from "react";
 import { useList } from "@refinedev/core";
 import { Layout, Typography, Row, Col, Card, Spin, Space, Button } from "antd";
+import { RESEARCH_ARCHIVES_COLLECTION_ID } from "@constants/appWrite";
 
 const { Title, Paragraph, Text } = Typography;
 
 const ResearchArchive = () => {
   // Use Refine's useList hook to fetch research data
   const { data, isLoading, error } = useList({
-    resource: "research", // This should match the collection name in Appwrite
+    resource: RESEARCH_ARCHIVES_COLLECTION_ID, // This should match the collection name in Appwrite
   });
 
   // Handle loading and error states
@@ -32,10 +35,10 @@ const ResearchArchive = () => {
   const researchArticles = data?.data || [];
 
   return (
-    <Layout style={{ backgroundColor: "#f9f9f9", padding: "20px" }}>
+    <Layout style={{ padding: "20px" }}>
       {/* Hero Section */}
-      <section style={{ background: "#3b5998", padding: "50px", color: "white" }}>
-        <Title level={2} style={{ textAlign: "center", color: "white" }}>
+      <section style={{ padding: "50px"}}>
+        <Title level={2} style={{ textAlign: "center"}}>
           Welcome to the Agricultural Research Archive
         </Title>
         <Paragraph style={{ fontSize: "16px", textAlign: "center", maxWidth: "800px", margin: "0 auto" }}>

@@ -167,7 +167,7 @@ function DashboardPage() {
       bnb: "bnb2",
     },
     {
-      today: "Today’s Users",
+      today: "Today’s Farmers",
       title: "3,200",
       percent: "+20%",
       icon: profile,
@@ -523,11 +523,10 @@ function DashboardPage() {
                 >
                   <div className="h-full col-content p-20">
                     <div className="ant-muse">
-                      <Text>Built by developers</Text>
-                      <Title level={5}>Muse Dashboard for Ant Design</Title>
+                      <Text>Built with Sierra Leonean for Sierra Leone</Text>
+                      <Title level={5}>F.A.R.M.I.S - Farming, Agriculture, Research Management and Information System</Title>
                       <Paragraph className="lastweek mb-36">
-                        From colors, cards, typography to complex elements, you
-                        will find the full documentation.
+                      F.A.R.M.I.S is an agricultural management system designed for  farmers, agricultural researchers, stakeholders, investors, and government and non-government agencies.
                       </Paragraph>
                     </div>
                     <div className="card-footer">

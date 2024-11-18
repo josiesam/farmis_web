@@ -42,12 +42,12 @@ const AgroRegistryPage = (props: Props) => {
   const farmers = data?.data || [];
 
   return (
-    <Layout style={{ backgroundColor: "#f9f9f9", padding: "20px" }}>
+    <Layout style={{ padding: "20px" }}>
       {/* Hero Section */}
       <section
-        style={{ background: "#1890ff", padding: "50px", color: "white" }}
+        style={{ padding: "50px" }}
       >
-        <Title level={2} style={{ textAlign: "center", color: "white" }}>
+        <Title level={2} style={{ textAlign: "center"}}>
           Welcome to the National Agriculture Registry
         </Title>
         <Paragraph
