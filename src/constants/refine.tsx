@@ -149,7 +149,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: FUNDING_PROJECTS_COLLECTION_ID!,
-    list: "/dashboard/fundings/projects",
+    list: "/dashboard/funding/projects",
     meta: {
       label: "projects",
       parent: "fundings",

@@ -12,7 +12,7 @@ import {
 import { type BaseRecord } from "@refinedev/core";
 import { Space, Table } from "antd";
 
-export default function LocationList() {
+export default function ProjectList() {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
