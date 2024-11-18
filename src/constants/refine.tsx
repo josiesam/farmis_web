@@ -14,6 +14,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'accounts',
+    list: '/dashboard/accounts',
     meta: {
       label: 'accounts',
       icon: <TeamOutlined />
@@ -60,6 +61,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'registry',
+    list: '/dashboard/registry',
     meta: {
       label: 'registry',
       icon: <DatabaseOutlined />
@@ -85,6 +87,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'fundings',
+    list: '/dashboard',
     meta: {
       label: 'fundings',
       icon: <FundViewOutlined />
