@@ -95,27 +95,27 @@ function Profile() {
 
   const data: Conversation[] = [
     {
-      title: "Sophie B.",
+      title: "Kadiatu Seasy",
       avatar: convesionImg,
       description: "Hi! I need more information…",
     },
     {
-      title: "Anne Marie",
+      title: "Aminata K.",
       avatar: convesionImg2,
       description: "Awesome work, can you…",
     },
     {
-      title: "Ivan",
+      title: "Mustapha L.",
       avatar: convesionImg3,
       description: "About files I can…",
     },
     {
-      title: "Peterson",
+      title: "Dauda Brima",
       avatar: convesionImg4,
       description: "Have a great afternoon…",
     },
     {
-      title: "Nick Daniel",
+      title: "Junior M.",
       avatar: convesionImg5,
       description: "Hi! I need more information…",
     },
@@ -162,8 +162,8 @@ function Profile() {
                 <Avatar size={74} shape="square" src={profilavatar} />
 
                 <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Sarah Jacob</h4>
-                  <p>CEO / Co-Founder</p>
+                  <h4 className="font-semibold m-0">Hawa Mansaray</h4>
+                  <p>Farmer, Kenema District</p>
                 </div>
               </Avatar.Group>
             </Col>
@@ -239,34 +239,32 @@ function Profile() {
             styles={{ body:{paddingTop: 0, paddingBottom: 16}  }}
           >
             <p className="text-dark">
-              {" "}
-              Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer
-              is no. If two equally difficult paths, choose the one more painful
-              in the short term (pain avoidance is creating an illusion of
-              equality).{" "}
+              Hi, I'm Hawa Mansaray, a 27 years old female farmer from the Lower 
+              Bambara Chiefdom, Kenema District. My main commodity crops are rice 
+              and vegetable. 
             </p>
             <hr className="my-25" />
-            <Descriptions title="Oliver Liam">
+            <Descriptions title="Hawa Mansaray">
               <Descriptions.Item label="Full Name" span={3}>
-                Sarah Emily Jacob
+                Hawa Mansaray
               </Descriptions.Item>
               <Descriptions.Item label="Mobile" span={3}>
-                (44) 123 1234 123
+                (+232) 34 123 456
               </Descriptions.Item>
               <Descriptions.Item label="Email" span={3}>
-                sarahjacob@mail.com
+                hawamansaray@farmis.org
               </Descriptions.Item>
               <Descriptions.Item label="Location" span={3}>
-                USA
+                Lower Bambara Chiefdom, Kenema District
               </Descriptions.Item>
               <Descriptions.Item label="Social" span={3}>
-                <a href="#pablo" className="mx-5 px-5">
+                <a href="#farmis" className="mx-5 px-5">
                   {<TwitterOutlined />}
                 </a>
-                <a href="#pablo" className="mx-5 px-5">
+                <a href="#farmis" className="mx-5 px-5">
                   {<FacebookOutlined style={{ color: "#344e86" }} />}
                 </a>
-                <a href="#pablo" className="mx-5 px-5">
+                <a href="#farmis" className="mx-5 px-5">
                   {<InstagramOutlined style={{ color: "#e1306c" }} />}
                 </a>
               </Descriptions.Item>

@@ -41,11 +41,8 @@ const CoreLayout = ({ children }: React.PropsWithChildren) => {
             justifyContent: "space-between",
           }}
         >
-          <div>
-            <Typography.Link style={{ color: colorPrimary  }} href="/">
-              FARMIS
-            </Typography.Link>
-          </div>
+          <ThemedTitleV2 text="FARMIS" collapsed={false} />
+
           <Menu
             style={{ backgroundColor: colorBgContainer }}
             mode="horizontal"

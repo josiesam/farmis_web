@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useList } from "@refinedev/core";
-import { Layout, Typography, Row, Col, Card, Spin, Space, Button } from "antd";
+import { Layout, Typography, Row, Col, Card, Spin, Space, Button, Empty } from "antd";
 import { PRODUCTS_COLLECTION_ID } from "@constants/appWrite";
 
 const { Title, Paragraph, Text } = Typography;
@@ -46,8 +46,8 @@ const Marketplace = () => {
           investors, and stakeholders can connect seamlessly, ensuring fair pricing and transparent transactions.
         </Paragraph>
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button type="primary" size="large" href="/add-product">
-            List Your Product
+          <Button type="primary" size="large" href="/marketplace/products">
+            View Products
           </Button>
         </div>
       </section>
@@ -84,11 +84,13 @@ const Marketplace = () => {
       </section>
 
       {/* Product Listings Section */}
-      {/* <section style={{ padding: "20px" }}>
+      <section style={{ padding: "20px" }}>
         <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
           Available Products
         </Title>
         <Row gutter={[16, 16]}>
+        {products.length  != 0 ? (
+          <>
           {products.map((product) => (
             <Col key={product.id} xs={24} sm={12} md={8} lg={6}>
               <Card
@@ -117,8 +119,10 @@ const Marketplace = () => {
               </Card>
             </Col>
           ))}
+          </>
+        ) : (<Empty style={{marginInline: 'auto'}} />)}
         </Row>
-      </section> */}
+      </section>
     </Layout>
   );
 };

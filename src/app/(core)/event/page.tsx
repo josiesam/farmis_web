@@ -139,6 +139,11 @@ const EventsPage = () => {
           events designed to empower farmers, stakeholders, and investors.
           Learn, connect, and grow with the agricultural community.
         </Paragraph>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button type="primary" size="large" href="/event/list">
+            View Events
+          </Button>
+        </div>
       </section>
 
       {/* Events Listing Section */}

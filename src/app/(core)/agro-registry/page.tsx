@@ -2,7 +2,7 @@
 
 import { FARMERS_COLLECTION_ID } from "@constants/appWrite";
 import { useList } from "@refinedev/core";
-import { Card, Col, Row, Space, Spin, Typography, Layout } from "antd";
+import { Card, Col, Row, Space, Spin, Typography, Layout, Button } from "antd";
 import React from "react";
 
 type Props = {};
@@ -65,6 +65,17 @@ const AgroRegistryPage = (props: Props) => {
           enabling better resource allocation, data-driven decision-making, and
           stronger connections across the agricultural value chain.
         </Paragraph>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Space>
+
+          <Button type="primary" size="large" href="/agro-registry/crops">
+            View Crops
+          </Button>
+          <Button type="primary" size="large" href="/agro-registry/farmers">
+            View Farmers
+          </Button>
+          </Space>
+        </div>
       </section>
 
       {/* Benefits Section */}

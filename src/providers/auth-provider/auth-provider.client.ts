@@ -11,6 +11,13 @@ import { message } from "antd";
 export const authProviderClient: AuthProvider = {
   login: async ({ email, password }) => {
     try {
+      await appwriteAccount.deleteSessions();
+    } catch (error) {}
+
+    Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
+    appwriteClient.setJWT("");
+    
+    try {
       Cookies.remove(APPWRITE_JWT_KEY!, { path: "/" });
       appwriteClient.setJWT("");
 

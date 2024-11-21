@@ -45,6 +45,11 @@ const ResearchArchive = () => {
           Explore a comprehensive archive of research articles, reports, and journals dedicated to advancing the
           agricultural sector. Gain insights into key studies that empower decision-making and foster innovation.
         </Paragraph>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Button type="primary" size="large" href="/research/list">
+            View Researches
+          </Button>
+        </div>
       </section>
 
       {/* Research Archive Section */}

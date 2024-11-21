@@ -141,7 +141,7 @@ export const refineResources: ResourceProps[] = [
   },
   {
     name: 'funding_overview',
-    list: '/dashboard/fundings',
+    list: '/dashboard/funding',
     meta: {
       label: 'overview',
       parent: 'fundings'
