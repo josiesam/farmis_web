@@ -124,11 +124,12 @@ export const authProviderClient: AuthProvider = {
           }
         )
       }
+      console.log(userType)
       
-
+      const redirect = Boolean(userType) ? `/config-profile/${userType}` : '/dashboard';
       return {
         success: true,
-        redirectTo: "/dashboard",
+        redirectTo: redirect,
       };
     } catch (error) {
       const { type, message, code } = error as AppwriteException;

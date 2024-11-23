@@ -178,7 +178,7 @@ function Profile() {
             >
               <Radio.Group defaultValue="a">
                 <Radio.Button value="a">OVERVIEW</Radio.Button>
-                <Radio.Button value="b">TEAMS</Radio.Button>
+                <Radio.Button value="b">CROPS</Radio.Button>
                 <Radio.Button value="c">PROJECTS</Radio.Button>
               </Radio.Group>
             </Col>
@@ -239,7 +239,7 @@ function Profile() {
             styles={{ body:{paddingTop: 0, paddingBottom: 16}  }}
           >
             <p className="text-dark">
-              Hi, I'm Hawa Mansaray, a 27 years old female farmer from the Lower 
+              Hi, I am Hawa Mansaray, a 27 years old female farmer from the Lower 
               Bambara Chiefdom, Kenema District. My main commodity crops are rice 
               and vegetable. 
             </p>
@@ -274,7 +274,7 @@ function Profile() {
         <Col span={24} md={8} className="mb-24">
           <Card
             bordered={false}
-            title={<h6 className="font-semibold m-0">Conversations</h6>}
+            title={<h6 className="font-semibold m-0">Customers</h6>}
             className="header-solid h-full"
             styles={{ body:{paddingTop: 0, paddingBottom: 16}  }}
           >

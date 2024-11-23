@@ -1,19 +1,35 @@
 "use client";
 
+import { LOCATIONS_COLLECTION_ID, USERS_COLLECTION_ID } from "@constants/appWrite";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 
 export default function FarmerCreate() {
   const { formProps, saveButtonProps } = useForm({});
 
+  const { selectProps: userSelectProps } = useSelect({
+    resource: USERS_COLLECTION_ID!,
+  })
+
   const { selectProps: locationSelectProps } = useSelect({
-    resource: "locations",
+    resource: LOCATIONS_COLLECTION_ID!,
   });
 
 
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
+        <Form.Item
+          label={"User"}
+          name={'user'}
+          rules={[
+            {
+              required: true,
+            }
+          ]}
+        >
+          <Select {...userSelectProps} />
+        </Form.Item>
         <Form.Item
           label={"Farm Size"}
           name={["farm_size"]}

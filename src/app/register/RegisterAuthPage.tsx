@@ -29,6 +29,7 @@ const { Option } = Select;
 
 const RegisterAuthPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const { token } = theme.useToken();
   const translate = useTranslate();
   const [form] = Form.useForm<RegisterFormTypes>();
@@ -55,26 +56,7 @@ const RegisterAuthPage: React.FC = () => {
     </Typography.Title>
   );
 
-  const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      // Replace this with your registration logic
-      console.log("Form Values:", values);
-      // Call the server API or auth provider register function here
-      // await authProviderServer.register(values);
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
-    // try {
-    //   await authProviderServer.login(values);
-    //   message.success("Login successful!");
-    //   router.push("/"); // Redirect to home or desired page after successful login
-    // } catch (error) {
-    //   message.error("Login failed. Please try again.");
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
+
   return (
     <AuthPage
       type="register"
@@ -110,6 +92,23 @@ const RegisterAuthPage: React.FC = () => {
               requiredMark={false}
               style={{ width: 300 }}
             >
+              <Form.Item
+                name="userType"
+                label={translate("pages.register.userType", "User Type")}
+                rules={[]}
+              >
+                <Select
+                  allowClear
+                  placeholder="Select a user type (blank for base user)"
+                >
+                  <Option value="farmer">Farmer</Option>
+                  <Option value="investor">Investor</Option>
+                  <Option value="stakeholder">
+                    Stakeholder (NGO, Gov, Leader)
+                  </Option>
+                </Select>
+              </Form.Item>
+
               <Form.Item
                 name="name"
                 label={translate("pages.register.name", "Full Name")}
@@ -199,14 +198,16 @@ const RegisterAuthPage: React.FC = () => {
               <Form.Item
                 name="phone"
                 label={translate("pages.register.phone", "Phone")}
+                help="Phone is required with country code format (+232)"
                 rules={[
                   {
                     required: true,
+                    pattern: /^\+?(\d)/,
                     message: translate(
-                      "pages.register.errors.requiredPhone",
-                      "Phone is required with country code format"
-                    ),
-                  },
+                      "pages.register.errors.internationalPhonenumberFormat",
+                      "Phone is required with country code format (+232)"
+                    )
+                  }
                 ]}
               >
                 <Input
@@ -231,22 +232,29 @@ const RegisterAuthPage: React.FC = () => {
                   },
                 ]}
               >
-                <Input type="password" placeholder="●●●●●●●●" size="large" />
+                <Input.Password placeholder="●●●●●●●●"  />
               </Form.Item>
 
               <Form.Item
-                name="userType"
-                label={translate("pages.register.userType", "User Type")}
+                label='Confirm Password'
+                name='password2'
+                dependencies={['password']}
                 rules={[
+                  {
+                    required: true,
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('The new password that you entered do not match!'));
+                    }
+                  })
                 ]}
-              >
-                <Select allowClear placeholder="Select a user type (blank for base user)">
-                  <Option value="farmer">Farmer</Option>
-                  <Option value="investor">Investor</Option>
-                  <Option value="stakeholder">Stakeholder (NGO, Gov, Leader)</Option>
-                </Select>
-              </Form.Item>
-
+                >
+                  <Input.Password />
+                </Form.Item>
               <div
                 style={{
                   display: "flex",
