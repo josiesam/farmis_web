@@ -26,7 +26,6 @@ export default function FarmersList() {
           dataIndex="user"
           title={"Name"}
           render={(value: any) => {
-            console.log(value);
             if (value) {
               const { name } = value;
               return name;

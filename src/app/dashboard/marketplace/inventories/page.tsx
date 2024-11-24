@@ -22,6 +22,7 @@ export default function InventoryList() {
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
         <Table.Column dataIndex={"name"} title={"Name"} />
+        <Table.Column dataIndex={"farmer"} title={"Farmer"} render={(value) => `${value?.user?.name}`}/>
         <Table.Column dataIndex={"quantity"} title={"Quantity"} />
         <Table.Column dataIndex={"product"} title={"Products"} 
           render={(value:Array<any>) => {

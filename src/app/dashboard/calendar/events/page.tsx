@@ -25,10 +25,10 @@ export default function EventList() {
           title={"ID"}
           render={(value: any, record: any, index: number) => index + 1}
         />
-        <Table.Column dataIndex={'region'} title={'Region'} />
-        <Table.Column dataIndex={'district'} title={'District'} />
-        <Table.Column dataIndex={'longitude'} title={'Longitude'} />
-        <Table.Column dataIndex={'latitude'} title={'Latitude'} />
+        <Table.Column dataIndex={'title'} title={'Title'} />
+        <Table.Column dataIndex={'start_date'} title={'Start Date'} render={(value) => <DateField value={value} />}/>
+        <Table.Column dataIndex={'location'} title={'Location'} render={(value) => `${value.district}`}/>
+        <Table.Column dataIndex={'user'} title={'Upload By'} render={(value) =>  `${value.name}`}/>
 
         <Table.Column
           dataIndex={["$createdAt"]}

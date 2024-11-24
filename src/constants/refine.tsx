@@ -30,7 +30,6 @@ export const refineResources: ResourceProps[] = [
   {
     name: FARMERS_COLLECTION_ID!,
     list: "/dashboard/accounts/farmers",
-    create: "/dashboard/accounts/farmers/create",
     edit: "/dashboard/accounts/farmers/edit/:id",
     show: "/dashboard/accounts/farmers/show/:id",
     meta: {
@@ -41,6 +40,8 @@ export const refineResources: ResourceProps[] = [
   {
     name: INVESTORS_COLLECTION_ID!,
     list: "/dashboard/accounts/investors",
+    edit: "/dashboard/accounts/investors/edit/:id",
+    show: "/dashboard/accounts/investors/show/:id",
     meta: {
       label: "investors",
       parent: "accounts"
@@ -49,6 +50,8 @@ export const refineResources: ResourceProps[] = [
   {
     name: STAKEHOLDERS_COLLECTION_ID!,
     list: "/dashboard/accounts/stakeholders",
+    edit: "/dashboard/accounts/stakeholders/edit/:id",
+    show: "/dashboard/accounts/stakeholders/show/:id",
     meta: {
       label: "stakeholders",
       parent: "accounts"
@@ -167,7 +170,7 @@ export const refineResources: ResourceProps[] = [
     name: 'events',
     meta: {
       label: 'calendar',
-      icons: <CalendarOutlined />
+      icon: <CalendarOutlined />
     }
   },
   {

@@ -26,6 +26,11 @@ export default function LocationList() {
           title={"Created at"}
           render={(value: any) => <DateField value={value} />}
         />
+        <Table.Column dataIndex={"transaction"} title={"Transaction ID"} />
+        <Table.Column dataIndex={'user'} title={'Buyer'}  render={(value) => `${value.user.name}`}/>
+        <Table.Column dataIndex={"quantity"} title={'Quantity'}  />
+        <Table.Column dataIndex={"total_price"} title={"Total Price"} render={(value) => `NLe ${value}`} />
+        <Table.Column dataIndex={"status"} title={'Status'} />
         <Table.Column
           title={"Actions"}
           dataIndex="actions"

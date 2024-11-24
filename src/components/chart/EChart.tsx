@@ -41,8 +41,8 @@ function EChart() {
           than last week <span className="bnb2">+30%</span>
         </Paragraph>
         <Paragraph className="lastweek">
-          We have created multiple options for you to put together and customise
-          into pixel perfect pages.
+          We have streamlined the process of tracking active in the part of Sub-Saharan 
+          Africa.
         </Paragraph>
         <Row gutter={[0, 0]}>
           {items.map((v, index) => (

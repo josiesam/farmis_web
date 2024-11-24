@@ -20,8 +20,36 @@ export default function LocationList() {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-      <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
-
+        <Table.Column
+          dataIndex="id"
+          title={"ID"}
+          render={(value: any, record: any, index: number) => index + 1}
+        />
+        <Table.Column
+          dataIndex="user"
+          title={"Name"}
+          render={(value: any) => {
+            if (value) {
+              const { name } = value;
+              return name;
+            } else {
+              return "N/A";
+            }
+          }}
+        />
+        <Table.Column
+          dataIndex={"location"}
+          title={"Location"}
+          render={(value: any) => `${value?.district}`}
+        />
+        <Table.Column
+          dataIndex={"sector_focus"}
+          title={"Sector Focus"}
+        />
+        <Table.Column
+          dataIndex={"area_of_interest"}
+          title={"Area of Interest"}
+        />
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}
