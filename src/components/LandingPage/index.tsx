@@ -9,7 +9,7 @@ type Props = {}
 
 const LandingPage = (props: Props) => {
   return (
-    <Content style={{ padding: "50px" }}>
+    <Content style={{ padding: "16px" }}>
     {/* Overview Section */}
     <div style={{ textAlign: "center", marginBottom: "50px" }}>
       <Title level={2}>Empowering Farmers Through Digital Innovation</Title>
