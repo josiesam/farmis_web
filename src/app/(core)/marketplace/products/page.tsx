@@ -144,28 +144,10 @@ const App: React.FC = () => {
 
   return (
     <>
-      <section style={{ padding: "50px" }}>
+      <section style={{ padding: "15px 50px" }}>
         <Title level={2} style={{ textAlign: "center" }}>
-          Welcome to the Agricultural Marketplace
+          All produce sourced directly from farmers.
         </Title>
-        <Paragraph
-          style={{
-            fontSize: "16px",
-            textAlign: "center",
-            maxWidth: "800px",
-            margin: "0 auto",
-          }}
-        >
-          The Agricultural Marketplace is your go-to platform for buying and
-          selling agricultural products. Farmers, investors, and stakeholders
-          can connect seamlessly, ensuring fair pricing and transparent
-          transactions.
-        </Paragraph>
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button type="primary" size="large" href="/marketplace/products">
-            View Product
-          </Button>
-        </div>
       </section>
       <Row gutter={[16, 16]}>
         {products.length != 0 ? (
