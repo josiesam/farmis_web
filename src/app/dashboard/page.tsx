@@ -161,7 +161,7 @@ function DashboardPage() {
   const count: CountData[] = [
     {
       today: "Month’s Sales",
-      title: "$53,000",
+      title: "NLe53,000",
       percent: "+30%",
       icon: dollor,
       bnb: "bnb2",
@@ -182,7 +182,7 @@ function DashboardPage() {
     },
     {
       today: "New Orders",
-      title: "$13,200",
+      title: "NLe13,200",
       percent: "10%",
       icon: cart,
       bnb: "bnb2",
@@ -193,7 +193,7 @@ function DashboardPage() {
     {
       img: ava1,
       Title: "Funding Project 1",
-      bud: "$14,000",
+      bud: "NLe14,000",
       progress: <Progress percent={60} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -215,7 +215,7 @@ function DashboardPage() {
     {
       img: ava2,
       Title: "Funding Project 2",
-      bud: "$3,000",
+      bud: "NLe3,000",
       progress: <Progress percent={10} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -250,7 +250,7 @@ function DashboardPage() {
     {
       img: ava4,
       Title: "Funding Project 4",
-      bud: "$20,600",
+      bud: "NLe20,600",
       progress: <Progress percent={100} size="small" status="active" />,
       member: (
         <div className="avatar-group mt-2">
@@ -266,7 +266,7 @@ function DashboardPage() {
     {
       img: ava5,
       Title: "Funding Project 5",
-      bud: "$4,000",
+      bud: "NLe4,000",
       progress: <Progress percent={80} size="small" />,
       member: (
         <div className="avatar-group mt-2">
@@ -289,7 +289,7 @@ function DashboardPage() {
     {
       img: ava6,
       Title: "Funding Project 5",
-      bud: "$2,000",
+      bud: "NLe2,000",
       progress: (
         <Progress
           percent={100}
@@ -313,7 +313,7 @@ function DashboardPage() {
 
   const timelineList: TimelineData[] = [
     {
-      title: "$2,400 - Redesign store",
+      title: "NLe2,400 - Redesign store",
       time: "09 JUN 7:20 PM",
       color: "green",
     },

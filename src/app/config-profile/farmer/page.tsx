@@ -13,6 +13,7 @@ import {
   useGetIdentity,
   Authenticated,
   useCreate,
+  AuthPage,
 } from "@refinedev/core";
 import {
   Button,
@@ -40,7 +41,7 @@ type Props = {};
 const { Option } = Select;
 
 const FarmerProfileConfig = (props: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   const { token } = theme.useToken();
   const translate = useTranslate();
   const { data: userData, isLoading: loadingUserData } =
@@ -49,9 +50,7 @@ const FarmerProfileConfig = (props: Props) => {
 
   const [form] = Form.useForm();
 
-
   const onFinish = async (values: IFarmerUpdateFormData) => {
-
     let farm_size;
     if (values.farm_size) {
       farm_size = parseFloat(values.farm_size);
@@ -72,7 +71,7 @@ const FarmerProfileConfig = (props: Props) => {
         date_of_birth: values.date_of_birth,
       },
     });
-    router.push('/dashboard')
+    router.push("/dashboard");
   };
 
   const CardTitle = (
@@ -92,120 +91,133 @@ const FarmerProfileConfig = (props: Props) => {
     </>
   );
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Card
-        title={CardTitle}
-        styles={{
-          body: { padding: 0, marginTop: "32px" },
-          header: { borderBottom: 0, padding: 0 },
-        }}
-        style={{
-          backgroundColor: token.colorBgElevated,
-          maxWidth: "400px",
-          margin: "auto",
-          padding: "32px",
-          boxShadow:
-            "0px 2px 4px rgba(0, 0, 0, 0.02), 0px 1px 6px -1px rgba(0, 0, 0, 0.02), 0px 1px 2px rgba(0, 0, 0, 0.03)",
-        }}
-      >
-        <Form
-          layout="vertical"
-          form={form}
-          onFinish={onFinish}
-          requiredMark={false}
-          style={{ width: 300 }}
+    <AuthPage
+      type="login"
+      renderContent={(content, title) => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Form.Item
-            name="location"
-            label={translate("pages.configFarmerProfile.location", "Your Location")}
-            rules={[
-              {
-                required: true,
-                message: translate(
-                  "pages.configFarmerProfile.errors.location",
-                  "Location is required"
-                ),
-              },
-            ]}
+          <Card
+            title={CardTitle}
+            styles={{
+              body: { padding: 0, marginTop: "32px" },
+              header: { borderBottom: 0, padding: 0 },
+            }}
+            style={{
+              backgroundColor: token.colorBgElevated,
+              maxWidth: "400px",
+              margin: "auto",
+              padding: "32px",
+              boxShadow:
+                "0px 2px 4px rgba(0, 0, 0, 0.02), 0px 1px 6px -1px rgba(0, 0, 0, 0.02), 0px 1px 2px rgba(0, 0, 0, 0.03)",
+            }}
           >
-            <Cascader
-              size="large"
-              options={LocationCascader}
-              placeholder={"Please select region & district"}
-            />
-          </Form.Item>
-          <Form.Item
-            name="digital_literacy_level"
-            label={translate(
-              "pages.configFarmerProfile.ddl",
-              "Digital Literacy Level"
-            )}
-            rules={[
-              {
-                required: true,
-                message: translate(
-                  "pages.configFarmerProfile.errors.ddl",
-                  "Digital Literacy Level is required"
-                ),
-              },
-            ]}
-          >
-            <Select
-              allowClear
-              placeholder="Select a digital literacy level"
-              size="large"
-              options={DigitalLiteracyLevelOption}
-            />
-          </Form.Item>
-          <Form.Item
-            name="date_of_birth"
-            label={translate(
-              "pages.configFarmerProfile.date_of_birth",
-              "Date of Birth"
-            )}
-          >
-            <DatePicker
-              size="large"
-              format={"DD/MM/YYYY"}
-              placeholder="Enter your date of dirth"
-            />
-          </Form.Item>
-          <Form.Item
-            name="farm_size"
-            label={translate(
-              "pages.configFarmerProfile.farm_size",
-              "Farm Size (In hectare)"
-            )}
-            rules={[]}
-          >
-            <Input size="large" />
-          </Form.Item>
-          <Form.Item
-            name="bio"
-            label={translate("pages.configFarmerProfile.bio", "Bio")}
-          >
-            <Input.TextArea
-              count={{ show: true, max: 250 }}
-              autoSize={{ minRows: 2, maxRows: 5 }}
-              placeholder="A brief description about yourself (Optional)"
-            />
-          </Form.Item>
+            <Form
+              layout="vertical"
+              form={form}
+              onFinish={onFinish}
+              requiredMark={false}
+              style={{ width: 300 }}
+            >
+              <Form.Item
+                name="location"
+                label={translate(
+                  "pages.configFarmerProfile.location",
+                  "Your Location"
+                )}
+                rules={[
+                  {
+                    required: true,
+                    message: translate(
+                      "pages.configFarmerProfile.errors.location",
+                      "Location is required"
+                    ),
+                  },
+                ]}
+              >
+                <Cascader
+                  size="large"
+                  options={LocationCascader}
+                  placeholder={"Please select region & district"}
+                />
+              </Form.Item>
+              <Form.Item
+                name="digital_literacy_level"
+                label={translate(
+                  "pages.configFarmerProfile.ddl",
+                  "Digital Literacy Level"
+                )}
+                rules={[
+                  {
+                    required: true,
+                    message: translate(
+                      "pages.configFarmerProfile.errors.ddl",
+                      "Digital Literacy Level is required"
+                    ),
+                  },
+                ]}
+              >
+                <Select
+                  allowClear
+                  placeholder="Select a digital literacy level"
+                  size="large"
+                  options={DigitalLiteracyLevelOption}
+                />
+              </Form.Item>
+              <Form.Item
+                name="date_of_birth"
+                label={translate(
+                  "pages.configFarmerProfile.date_of_birth",
+                  "Date of Birth"
+                )}
+              >
+                <DatePicker
+                  size="large"
+                  format={"DD/MM/YYYY"}
+                  placeholder="Enter your date of dirth"
+                />
+              </Form.Item>
+              <Form.Item
+                name="farm_size"
+                label={translate(
+                  "pages.configFarmerProfile.farm_size",
+                  "Farm Size (In hectare)"
+                )}
+                rules={[]}
+              >
+                <Input size="large" />
+              </Form.Item>
+              <Form.Item
+                name="bio"
+                label={translate("pages.configFarmerProfile.bio", "Bio")}
+              >
+                <Input.TextArea
+                  count={{ show: true, max: 250 }}
+                  autoSize={{ minRows: 2, maxRows: 5 }}
+                  placeholder="A brief description about yourself (Optional)"
+                />
+              </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={isUpdating} block>
-              Config
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={isUpdating}
+                  block
+                >
+                  Config
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        </div>
+      )}
+    />
   );
 };
 

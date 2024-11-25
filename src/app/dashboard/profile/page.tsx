@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { use, useState } from "react";
 
 import {
   Row,
@@ -25,6 +25,7 @@ import {
   VerticalAlignTopOutlined,
   EditOutlined,
 } from "@ant-design/icons";
+import { useGetIdentity } from "@refinedev/core";
 
 const BgProfile = "/assets/images/bg-profile.jpg";
 const profilavatar = "/assets/images/face-1.jpg";
@@ -51,9 +52,21 @@ interface Conversation {
   description: string;
 }
 
+type IUser = {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string;
+  email: string;
+  phone: string;
+};
+
 function Profile() {
   const [imageURL, setImageURL] = useState<Boolean>(false);
   const [, setLoading] = useState<Boolean>(false);
+  const { data: user } = useGetIdentity<IUser>();
+
+
 
   const getBase64 = (img: Blob, callback: (result: string | ArrayBuffer | null) => void) => {
     const reader = new FileReader();
@@ -159,10 +172,10 @@ function Profile() {
           <Row justify="space-between" align="middle" gutter={[24, 0]}>
             <Col span={24} md={12} className="col-info">
               <Avatar.Group>
-                <Avatar size={74} shape="square" src={profilavatar} />
+                <Avatar size={74} shape="square" src={user?.avatar} alt="profile" />
 
                 <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Hawa Mansaray</h4>
+                  <h4 className="font-semibold m-0">{user?.name}</h4>
                   <p>Farmer, Kenema District</p>
                 </div>
               </Avatar.Group>
@@ -239,20 +252,20 @@ function Profile() {
             styles={{ body:{paddingTop: 0, paddingBottom: 16}  }}
           >
             <p className="text-dark">
-              Hi, I am Hawa Mansaray, a 27 years old female farmer from the Lower 
+              {`Hi, I am ${user?.name}, a 27 years old female farmer from the Lower 
               Bambara Chiefdom, Kenema District. My main commodity crops are rice 
-              and vegetable. 
+              and vegetable. `}
             </p>
             <hr className="my-25" />
-            <Descriptions title="Hawa Mansaray">
+            <Descriptions title={user?.name}>
               <Descriptions.Item label="Full Name" span={3}>
-                Hawa Mansaray
+                {user?.name}
               </Descriptions.Item>
               <Descriptions.Item label="Mobile" span={3}>
-                (+232) 34 123 456
+                {user?.phone}
               </Descriptions.Item>
               <Descriptions.Item label="Email" span={3}>
-                hawamansaray@farmis.org
+                {user?.email}
               </Descriptions.Item>
               <Descriptions.Item label="Location" span={3}>
                 Lower Bambara Chiefdom, Kenema District

@@ -10,7 +10,7 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { type BaseRecord } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { Avatar, Space, Table } from "antd";
 
 export default function LocationList() {
   const { tableProps } = useTable({
@@ -20,11 +20,34 @@ export default function LocationList() {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-      <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
-      <Table.Column dataIndex={"name"} title={"Name"} />
-      <Table.Column dataIndex={"category"} title={"Category"} />
-      <Table.Column dataIndex={"price"} title={"Price"} render={(value) => `NLe ${value}`} />
-      <Table.Column dataIndex={"farmer"} title={"Farmer"} render={(value) => `${value?.user?.name}`} />
+        <Table.Column
+          dataIndex="id"
+          title={"ID"}
+          render={(value: any, record: any, index: number) => index + 1}
+        />
+        <Table.Column
+          dataIndex={"images"}
+          title={"Images"}
+          render={(value) => (
+            <Avatar.Group max={{ count: 2 }}>
+              {value.map((imageSrc: string) => (
+                <Avatar key={imageSrc} src={imageSrc} />
+              ))}
+            </Avatar.Group>
+          )}
+        />
+        <Table.Column dataIndex={"name"} title={"Name"} />
+        <Table.Column dataIndex={"category"} title={"Category"} />
+        <Table.Column
+          dataIndex={"price"}
+          title={"Price"}
+          render={(value) => `NLe ${value}`}
+        />
+        <Table.Column
+          dataIndex={"farmer"}
+          title={"Farmer"}
+          render={(value) => `${value?.user?.name}`}
+        />
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}
