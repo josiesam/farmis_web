@@ -92,7 +92,7 @@ const OrderProductPage = () => {
             title: "Price",
             dataIndex: 'price',
             key: 'price',
-            render: (price:number) =>  `$${price}`
+            render: (price:number) =>  `NLe${price}`
         },
         {
             title: "Quantity",
@@ -109,7 +109,7 @@ const OrderProductPage = () => {
 
     return (
         <div style={{ padding: "20px" }}>
-            <Title level={2}>Order Agricultural Products</Title>
+            <Title level={2}>Your Order</Title>
             <Table
                 dataSource={products}
                 columns={columns}
