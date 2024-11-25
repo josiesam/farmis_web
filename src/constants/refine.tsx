@@ -112,6 +112,9 @@ export const refineResources: ResourceProps[] = [
   {
     name: PRODUCTS_COLLECTION_ID!,
     list: 'dashboard/marketplace/products',
+    create: 'dashboard/marketplace/products/create',
+    // edit: 'dashboard/marketplace/products/edit/:id',
+    show: 'dashboard/marketplace/products/show/:id',
     meta: {
       label: 'products',
       parent: 'marketplace'

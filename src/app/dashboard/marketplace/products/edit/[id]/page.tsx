@@ -1,19 +1,19 @@
 "use client";
 
 import { PlusOutlined } from "@ant-design/icons";
+import { FARMERS_COLLECTION_ID } from "@constants/appWrite";
 import { useImages } from "@contexts/appwrite-storage";
-import { Create, getValueFromEvent, useForm } from "@refinedev/antd";
+import { Create, Edit, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
 import { ID } from "@refinedev/appwrite";
 import { file2Base64 } from "@refinedev/core";
 import {
-  DatePicker,
   Form,
   GetProp,
   Image,
   Input,
   InputNumber,
   message,
-  Spin,
+  Select,
   Upload,
   UploadFile,
   UploadProps,
@@ -30,13 +30,18 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-export default function ResearchCreate() {
+export default function ProductEdit() {
   const { formProps, saveButtonProps, onFinish } = useForm({});
   const bucketStore = useImages();
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const { selectProps: farmerSelectProps} = useSelect({
+    resource: FARMERS_COLLECTION_ID!,
+    optionLabel: (item) => `${item.user.name}`
+  })
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -62,10 +67,10 @@ export default function ResearchCreate() {
     try {
       const base64Files: any = [];
 
-      const { title, author, publication_date, publisher, summary, document_link } =
+      const { name, farmer, category, description, price, images } =
         values;
 
-      for (const file of document_link) {
+      for (const file of images) {
         let uploadFile;
         if (file.originFileObj) {
           const base64String = await file2Base64(file);
@@ -78,84 +83,97 @@ export default function ResearchCreate() {
           uploadFile = file;
         }
 
+        console.log(typeof uploadFile);
+
         const response = await bucketStore.add({
           fileId: ID.unique(),
           file: uploadFile.originFileObj,
         });
 
-        const imageUrl = await bucketStore.downloadImage(response!.$id);
+        const imageUrl = await bucketStore.getView(response!.$id);
 
         base64Files.push(imageUrl);
       }
 
-      message.success("Research data upload successfully");
+      let _price;
+      if (price) {
+        _price = parseFloat(price);
+      } else {
+        _price = null;
+      }
+
+      message.success("Product data upload successfully");
 
       return (
         formProps.onFinish &&
         formProps.onFinish({
-          title,
-          author,
-          publication_date,
-          publisher,
-          summary,
-          document_link: base64Files[0],
+          name,
+          farmer,
+          category,
+          description,
+          price: _price,
+          images: base64Files,
         })
       );
     } catch (error) {
-      message.error(`Research not uploaded. Error: ${error}`);
+      message.error(`Product not uploaded. Error: ${error}`);
     }
   };
 
   return (
-    <Create saveButtonProps={saveButtonProps}>
-        <Form {...formProps} onFinish={handleOnFinish} layout="vertical">
-          <Form.Item label={"Document"}>
-            <Form.Item
-              name={"document_link"}
-              valuePropName="fileList"
-              getValueFromEvent={getValueFromEvent}
-              noStyle
+    <Edit saveButtonProps={saveButtonProps}>
+      <Form {...formProps} onFinish={handleOnFinish} layout="vertical">
+        <Form.Item label={"Images"}>
+          <Form.Item
+            name={"images"}
+            valuePropName="fileList"
+            getValueFromEvent={getValueFromEvent}
+            noStyle
+          >
+            <Upload
+              listType="picture-card"
+              fileList={fileList}
+              multiple
+              beforeUpload={() => false}
+              onPreview={handlePreview}
+              onChange={handleChange}
             >
-              <Upload
-                listType="picture-card"
-                fileList={fileList}
-                multiple
-                beforeUpload={() => false}
-                onPreview={handlePreview}
-                onChange={handleChange}
-              >
-                {fileList.length >= 1 ? null : uploadButton}
-              </Upload>
-            </Form.Item>
+              {fileList.length >= 5 ? null : uploadButton}
+            </Upload>
           </Form.Item>
-          <Form.Item
-            label={"Title"}
-            name={"title"}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label={"Author"} name={"author"} rules={[{required:true}]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={"Publisher"} name={"publisher"} rules={[]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label={"Summary"} name={"summary"} rules={[]}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label={"Publication Date"}
-            name={"publication_date"}
-            rules={[]}
-          >
-            <DatePicker />
-          </Form.Item>
-        </Form>
-    </Create>
+        </Form.Item>
+        <Form.Item
+          label={"Name"}
+          name={["name"]}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item label={"Farmer"} name={"farmer"} rules={[]}>
+          <Select {...farmerSelectProps} />
+        </Form.Item>
+        <Form.Item label={"Description"} name={"description"} rules={[]}>
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label={"Price"}
+          name={["price"]}
+          rules={[]}
+        >
+          <InputNumber />
+        </Form.Item>
+        <Form.Item
+          label={"Category"}
+          name={["category"]}
+          rules={[]}
+        >
+          <Input />
+        </Form.Item>
+      </Form>
+    </Edit>
   );
 }

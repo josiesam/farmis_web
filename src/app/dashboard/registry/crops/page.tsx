@@ -29,7 +29,7 @@ export default function LocationList() {
           )
         } />
         <Table.Column dataIndex="name" title={"Name"} />
-        <Table.Column dataIndex="growing_string" title={"Season"} />
+        <Table.Column dataIndex="growing_season" title={"Season"} />
         <Table.Column dataIndex="yield_per_hectare" title={"Yield"} />
         <Table.Column
           dataIndex={["$createdAt"]}

@@ -34,7 +34,7 @@ export default function LocationList() {
           title={"Publication Date"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex={"document_link"} title="Report" render={(value) => (<Button href={value} icon={<DownloadOutlined />} />)} />
+        <Table.Column dataIndex={"document_link"} title="Report" render={(value) => (<Button type="primary" color="default" href={value} icon={<DownloadOutlined />} />)} />
         <Table.Column
           title={"Actions"}
           dataIndex="actions"

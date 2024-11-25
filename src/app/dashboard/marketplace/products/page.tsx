@@ -24,7 +24,7 @@ export default function LocationList() {
       <Table.Column dataIndex={"name"} title={"Name"} />
       <Table.Column dataIndex={"category"} title={"Category"} />
       <Table.Column dataIndex={"price"} title={"Price"} render={(value) => `NLe ${value}`} />
-      <Table.Column dataIndex={"farmer"} title={"Farmer"} render={(value) => `${value?.user?.namee}`} />
+      <Table.Column dataIndex={"farmer"} title={"Farmer"} render={(value) => `${value?.user?.name}`} />
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}

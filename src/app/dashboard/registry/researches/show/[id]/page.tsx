@@ -8,7 +8,7 @@ import { Button, Flex, Image, Space, Typography } from "antd";
 
 const { Title } = Typography;
 
-export default function InvestorsShow() {
+export default function ResearchShow() {
   const { queryResult } = useShow({});
   const { data, isLoading } = queryResult;
 
@@ -37,7 +37,7 @@ export default function InvestorsShow() {
         </Space>
       </Flex>
       <Space />
-      <Button block href={record?.document_line} icon={<DownloadOutlined />} />
+      <Button block type="primary" href={record?.document_line} icon={<DownloadOutlined />} />
     </Show>
   );
 }
