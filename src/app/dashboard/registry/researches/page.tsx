@@ -1,5 +1,6 @@
 "use client";
 
+import { DownloadOutlined } from "@ant-design/icons";
 import {
   DateField,
   DeleteButton,
@@ -33,12 +34,7 @@ export default function LocationList() {
           title={"Publication Date"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex={"document_link"} title="Report" render={(value) => (<Button href={value} />)} />
-        <Table.Column
-          dataIndex={["$createdAt"]}
-          title={"Created at"}
-          render={(value: any) => <DateField value={value} />}
-        />
+        <Table.Column dataIndex={"document_link"} title="Report" render={(value) => (<Button href={value} icon={<DownloadOutlined />} />)} />
         <Table.Column
           title={"Actions"}
           dataIndex="actions"

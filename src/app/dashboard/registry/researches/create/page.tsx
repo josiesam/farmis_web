@@ -2,15 +2,18 @@
 
 import { PlusOutlined } from "@ant-design/icons";
 import { useImages } from "@contexts/appwrite-storage";
-import { Create, Edit, getValueFromEvent, useForm } from "@refinedev/antd";
+import { Create, getValueFromEvent, useForm } from "@refinedev/antd";
 import { ID } from "@refinedev/appwrite";
 import { file2Base64 } from "@refinedev/core";
 import {
+  DatePicker,
   Form,
   GetProp,
+  Image,
   Input,
   InputNumber,
   message,
+  Spin,
   Upload,
   UploadFile,
   UploadProps,
@@ -59,10 +62,10 @@ export default function CropCreate() {
     try {
       const base64Files: any = [];
 
-      const { name, crop_type, growing_season, yield_per_hectare, images } =
+      const { title, author, publication_date, publisher, summary, document_link } =
         values;
 
-      for (const file of images) {
+      for (const file of document_link) {
         let uploadFile;
         if (file.originFileObj) {
           const base64String = await file2Base64(file);
@@ -75,94 +78,84 @@ export default function CropCreate() {
           uploadFile = file;
         }
 
-        console.log(typeof(uploadFile))
-
         const response = await bucketStore.add({
           fileId: ID.unique(),
           file: uploadFile.originFileObj,
         });
 
-        const imageUrl = await bucketStore.getView(response!.$id);
+        const imageUrl = await bucketStore.downloadImage(response!.$id);
 
-        base64Files.push(imageUrl)
+        base64Files.push(imageUrl);
       }
 
-      let _yield_per_hectare;
-      if (yield_per_hectare) {
-        _yield_per_hectare = parseFloat(yield_per_hectare);
-      } else {
-        _yield_per_hectare = null;
-      }
-
-      message.success("Crop data upload successfully")
+      message.success("Research data upload successfully");
 
       return (
         formProps.onFinish &&
         formProps.onFinish({
-          name,
-          crop_type,
-          growing_season,
-          yield_per_hectare: _yield_per_hectare,
-          images: base64Files,
+          title,
+          author,
+          publication_date,
+          publisher,
+          summary,
+          document_link: base64Files[0],
         })
       );
     } catch (error) {
-      message.error(`Crop not uploaded. Error: ${error}`)
+      message.error(`Research not uploaded. Error: ${error}`);
     }
   };
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
-      <Form {...formProps} onFinish={handleOnFinish} layout="vertical">
-        <Form.Item label={"Images"}>
-          <Form.Item
-            name={"images"}
-            valuePropName="fileList"
-            getValueFromEvent={getValueFromEvent}
-            noStyle
-          >
-            <Upload
-              listType="picture-card"
-              fileList={fileList}
-              multiple
-              beforeUpload={() => false}
-              onPreview={handlePreview}
-              onChange={handleChange}
+    <Create saveButtonProps={saveButtonProps}>
+        <Form {...formProps} onFinish={handleOnFinish} layout="vertical">
+          <Form.Item label={"Images"}>
+            <Form.Item
+              name={"document_link"}
+              valuePropName="fileList"
+              getValueFromEvent={getValueFromEvent}
+              noStyle
             >
-              {fileList.length >= 5 ? null : uploadButton}
-            </Upload>
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                multiple
+                beforeUpload={() => false}
+                onPreview={handlePreview}
+                onChange={handleChange}
+              >
+                {fileList.length >= 1 ? null : uploadButton}
+              </Upload>
+            </Form.Item>
           </Form.Item>
-        </Form.Item>
-        <Form.Item
-          label={"Name"}
-          name={["name"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label={"Crop Type"} name={["crop_type"]} rules={[]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={"Growing Season"}
-          name={["growing_season"]}
-          rules={[]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={"Yield per hectare"}
-          name={["yield_per_hectare"]}
-          rules={[]}
-        >
-          <InputNumber />
-        </Form.Item>
-      </Form>
-    </Edit>
+          <Form.Item
+            label={"Title"}
+            name={"title"}
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item label={"Author"} name={"author"} rules={[{required:true}]}>
+            <Input />
+          </Form.Item>
+          <Form.Item label={"Publisher"} name={"publisher"} rules={[]}>
+            <Input />
+          </Form.Item>
+          <Form.Item label={"Summary"} name={"summary"} rules={[]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label={"Publication Date"}
+            name={"publication_date"}
+            rules={[]}
+          >
+            <DatePicker />
+          </Form.Item>
+        </Form>
+    </Create>
   );
 }
-

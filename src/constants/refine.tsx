@@ -86,6 +86,9 @@ export const refineResources: ResourceProps[] = [
   {
     name: RESEARCH_ARCHIVES_COLLECTION_ID!,
     list: "/dashboard/registry/researches",
+    create: "/dashboard/registry/researches/create",
+    // edit: "/dashboard/registry/researches/edit/:id",
+    show: "/dashboard/registry/researches/show/:id",
     meta: {
       label: "researches",
       parent: "registry"
