@@ -21,6 +21,7 @@ import {
 import { RESEARCH_ARCHIVES_COLLECTION_ID} from "@constants/appWrite";
 import { useList } from "@refinedev/core";
 import Link from "next/link";
+import { DateField } from "@refinedev/antd";
 
 const { Text } = Typography;
 
@@ -157,7 +158,7 @@ const App: React.FC = () => {
                       <strong>Author:</strong> {research.author || "N/A"}
                     </Text>
                     <Text>
-                      <strong>Publication date:</strong> {research.publication_date || "N/A"}
+                      <strong>Publication date:</strong> <DateField value={research.publication_date || "N/A"} />
                     </Text>
                     <Text>
                       <strong>Publisher:</strong>{" "}
