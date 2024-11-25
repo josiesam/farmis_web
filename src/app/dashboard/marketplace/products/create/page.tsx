@@ -67,7 +67,7 @@ export default function ProductCreate() {
     try {
       const base64Files: any = [];
 
-      const { name, farmer, category, description, price, images } =
+      const { name, farmer, category, description, quantity_available, price, images } =
         values;
 
       for (const file of images) {
@@ -112,6 +112,7 @@ export default function ProductCreate() {
           category,
           description,
           price: _price,
+          quantity_available,
           images: base64Files,
         })
       );
@@ -162,6 +163,13 @@ export default function ProductCreate() {
         <Form.Item
           label={"Price"}
           name={["price"]}
+          rules={[]}
+        >
+          <InputNumber />
+        </Form.Item>
+        <Form.Item
+          label={"Quantity Available"}
+          name={["quantity_available"]}
           rules={[]}
         >
           <InputNumber />

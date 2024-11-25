@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import {
   EditOutlined,
   EllipsisOutlined,
+  EyeOutlined,
   SettingOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -16,9 +18,10 @@ import {
   Space,
   Spin,
   Switch,
+  Image,
   Typography,
 } from "antd";
-import { EVENTS_COLLECTION_ID } from "@constants/appWrite";
+import { CROPS_COLLECTION_ID, EVENTS_COLLECTION_ID } from "@constants/appWrite";
 import { useList } from "@refinedev/core";
 
 const { Text } = Typography;
@@ -32,7 +35,7 @@ const actions: React.ReactNode[] = [
 const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
   const { data, isLoading, error } = useList({
-    resource: EVENTS_COLLECTION_ID! // This should match the collection name in Appwrite
+    resource: CROPS_COLLECTION_ID! // This should match the collection name in Appwrite
   });
 
   // Handle loading and error states
@@ -100,7 +103,7 @@ const App: React.FC = () => {
             bordered={true}
             loading={isLoading}
             hoverable
-            style={{ borderColor: "#ff9f00", textAlign: "center" }}
+            style={{ borderColor: "#ff9f00", textAlign: "center",  }}
           >
             <Space direction="vertical">
               <Text>
@@ -136,44 +139,29 @@ const App: React.FC = () => {
     );
   }
 
-  // Extract events data
-  const events = data?.data || [];
+  // Extract crops data
+  const crops = data?.data || [];
+
+  console.log(crops)
 
   return (
-      <Row gutter={[16, 16]}>
-        {events.length != 0 ? (
+      <Row gutter={[16, 32]}>
+        {crops.length != 0 ? (
           <>
-            {events.map((event) => (
-              <Col key={event.$id} xs={24} sm={12} md={8} lg={6}>
+            {crops.map((crop) => (
+              <Col key={crop.$id} xs={24} sm={12} md={8} lg={6}>
                 <Card
-                  title={event.title}
-                  bordered={true}
-                  hoverable
-                  style={{ borderColor: "#ff9f00", textAlign: "center" }}
+                  cover={<Image src={crop.images[0]} style={{ width: 300, height: 300, objectFit:'cover', overflow: 'hidden'}}  />}
+                  style={{ width: 300,}}
+                  actions={[
+                    <Button key="eye" href="#" icon={<EyeOutlined  />} />,
+                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href="/marketplace/product/order" />
+                  ]}
                 >
-                  <Space direction="vertical">
-                    <Text>
-                      <strong>Category:</strong> {event.start_date || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Price:</strong> ${event.end_date || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Location:</strong>{" "}
-                      {`${event.location.region}, ${event.location.district}` || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Seller:</strong>{" "}
-                      {event.user.name || "Unknown"}
-                    </Text>
-                    <Button
-                      type="primary"
-                      size="small"
-                      href={`#`}
-                    >
-                      View Details
-                    </Button>
-                  </Space>
+                  <Card.Meta
+                    title={crop.name}
+                    description={crop.crop_type}
+                  />
                 </Card>
               </Col>
             ))}

@@ -107,12 +107,12 @@ const Marketplace = () => {
                     <strong>Price:</strong> ${product.price || "N/A"}
                   </Text>
                   <Text>
-                    <strong>Quantity Available:</strong> {product.quantity || "N/A"}
+                    <strong>Quantity Available:</strong> {product.quantity_available || "N/A"}
                   </Text>
                   <Text>
-                    <strong>Seller:</strong> {product.seller_name || "Unknown"}
+                    <strong>Seller:</strong> {product.farmer.user.name || "Unknown"}
                   </Text>
-                  <Button type="primary" size="small" href={`/product/${product.id}`}>
+                  <Button type="primary" size="small" href={`/product/#`}>
                     View Details
                   </Button>
                 </Space>

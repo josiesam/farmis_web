@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import {
   EditOutlined,
   EllipsisOutlined,
+  EyeOutlined,
   SettingOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -12,6 +14,7 @@ import {
   Col,
   Empty,
   Flex,
+  Image,
   Row,
   Space,
   Spin,
@@ -169,35 +172,18 @@ const App: React.FC = () => {
           <>
             {products.map((product) => (
               <Col key={product.id} xs={24} sm={12} md={8} lg={6}>
-                <Card
-                  title={product.name}
-                  bordered={true}
-                  hoverable
-                  style={{ borderColor: "#ff9f00", textAlign: "center" }}
+                 <Card
+                  cover={<Image src={product.images[0]} style={{ width: 300, height: 300, objectFit:'cover', overflow: 'hidden'}}  />}
+                  style={{ width: 300,}}
+                  actions={[
+                    <Button key="eye" href="#" icon={<EyeOutlined  />} />,
+                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href="/marketplace/product/order" />
+                  ]}
                 >
-                  <Space direction="vertical">
-                    <Text>
-                      <strong>Category:</strong> {product.category || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Price:</strong> ${product.price || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Quantity Available:</strong>{" "}
-                      {product.quantity || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Seller:</strong>{" "}
-                      {product.seller_name || "Unknown"}
-                    </Text>
-                    <Button
-                      type="primary"
-                      size="small"
-                      href={`/product/${product.id}`}
-                    >
-                      View Details
-                    </Button>
-                  </Space>
+                  <Card.Meta
+                    title={product.name}
+                    description={product.description}
+                  />
                 </Card>
               </Col>
             ))}
