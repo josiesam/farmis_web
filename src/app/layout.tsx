@@ -7,8 +7,8 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 
-import '@/app/main.css'
-import '@/app/responsive.css'
+import "@/app/main.css";
+import "@/app/responsive.css";
 
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ColorModeContextProvider } from "@contexts/color-mode";
@@ -18,8 +18,12 @@ import {
   appwriteLiveProvider,
 } from "@providers/data-provider";
 import "@refinedev/antd/dist/reset.css";
-import { FARMERS_COLLECTION_ID, LOCATIONS_COLLECTION_ID } from "@constants/appWrite";
+import {
+  FARMERS_COLLECTION_ID,
+  LOCATIONS_COLLECTION_ID,
+} from "@constants/appWrite";
 import { refineResources } from "@constants/refine";
+import { ImagesProvider } from "@contexts/appwrite-storage/index";
 
 export const metadata: Metadata = {
   title: "FARMIS",
@@ -62,7 +66,7 @@ export default function RootLayout({
                       liveMode: "auto",
                     }}
                   >
-                    {children}
+                    <ImagesProvider>{children}</ImagesProvider>
                     <RefineKbar />
                   </Refine>
                 </DevtoolsProvider>

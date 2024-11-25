@@ -27,6 +27,7 @@ export default function EventList() {
         />
         <Table.Column dataIndex={'title'} title={'Title'} />
         <Table.Column dataIndex={'start_date'} title={'Start Date'} render={(value) => <DateField value={value} />}/>
+        <Table.Column dataIndex={'end_date'} title={'End Date'} render={(value) => <DateField value={value} />}/>
         <Table.Column dataIndex={'location'} title={'Location'} render={(value) => `${value.district}`}/>
         <Table.Column dataIndex={'user'} title={'Upload By'} render={(value) =>  `${value.name}`}/>
 

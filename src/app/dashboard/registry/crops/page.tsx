@@ -10,7 +10,7 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { type BaseRecord } from "@refinedev/core";
-import { Space, Table, Typography } from "antd";
+import { Avatar, Space, Table, Typography } from "antd";
 
 export default function LocationList() {
   const { tableProps } = useTable({
@@ -21,7 +21,13 @@ export default function LocationList() {
     <List>
       <Table {...tableProps} rowKey="id">
       <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
-
+        <Table.Column dataIndex={'images'} title={"Images"} render={
+          (value) => (
+            <Avatar.Group max={{count: 2}}>
+              {value.map((imageSrc: string) => (<Avatar key={imageSrc} src={imageSrc} />))}
+            </Avatar.Group>
+          )
+        } />
         <Table.Column dataIndex="name" title={"Name"} />
         <Table.Column dataIndex="growing_string" title={"Season"} />
         <Table.Column dataIndex="yield_per_hectare" title={"Yield"} />

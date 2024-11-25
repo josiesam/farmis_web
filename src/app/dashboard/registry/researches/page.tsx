@@ -10,7 +10,7 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { type BaseRecord } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 
 export default function LocationList() {
   const { tableProps } = useTable({
@@ -33,6 +33,7 @@ export default function LocationList() {
           title={"Publication Date"}
           render={(value: any) => <DateField value={value} />}
         />
+        <Table.Column dataIndex={"document_link"} title="Report" render={(value) => (<Button href={value} />)} />
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}

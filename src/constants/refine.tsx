@@ -75,6 +75,9 @@ export const refineResources: ResourceProps[] = [
   {
     name: CROPS_COLLECTION_ID!,
     list: "/dashboard/registry/crops",
+    create: "/dashboard/registry/crops/create",
+    edit: "/dashboard/registry/crops/edit/:id",
+    show: "/dashboard/registry/crops/show/:id",
     meta: {
       label: "crops",
       parent: "registry"

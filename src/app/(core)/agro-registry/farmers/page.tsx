@@ -18,7 +18,7 @@ import {
   Switch,
   Typography,
 } from "antd";
-import { EVENTS_COLLECTION_ID } from "@constants/appWrite";
+import { EVENTS_COLLECTION_ID, FARMERS_COLLECTION_ID } from "@constants/appWrite";
 import { useList } from "@refinedev/core";
 
 const { Text } = Typography;
@@ -32,7 +32,7 @@ const actions: React.ReactNode[] = [
 const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
   const { data, isLoading, error } = useList({
-    resource: EVENTS_COLLECTION_ID! // This should match the collection name in Appwrite
+    resource: FARMERS_COLLECTION_ID! // This should match the collection name in Appwrite
   });
 
   // Handle loading and error states
@@ -137,34 +137,30 @@ const App: React.FC = () => {
   }
 
   // Extract events data
-  const events = data?.data || [];
+  const farmers = data?.data || [];
 
   return (
       <Row gutter={[16, 16]}>
-        {events.length != 0 ? (
+        {farmers.length != 0 ? (
           <>
-            {events.map((event) => (
-              <Col key={event.$id} xs={24} sm={12} md={8} lg={6}>
+            {farmers.map((farmer) => (
+              <Col key={farmer.$id} xs={24} sm={12} md={8} lg={6}>
                 <Card
-                  title={event.title}
+                  title={farmer.user.name}
                   bordered={true}
                   hoverable
                   style={{ borderColor: "#ff9f00", textAlign: "center" }}
                 >
                   <Space direction="vertical">
                     <Text>
-                      <strong>Category:</strong> {event.start_date || "N/A"}
+                      <strong>Farmer Size:</strong> {farmer.farm_size || "N/A"}
                     </Text>
                     <Text>
-                      <strong>Price:</strong> ${event.end_date || "N/A"}
+                      <strong>Crop:</strong> {farmer.farmerCrop.length || "N/A"}
                     </Text>
                     <Text>
                       <strong>Location:</strong>{" "}
-                      {`${event.location.region}, ${event.location.district}` || "N/A"}
-                    </Text>
-                    <Text>
-                      <strong>Seller:</strong>{" "}
-                      {event.user.name || "Unknown"}
+                      {`${farmer.location.region}, ${farmer.location.district}` || "N/A"}
                     </Text>
                     <Button
                       type="primary"
