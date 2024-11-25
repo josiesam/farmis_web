@@ -4,7 +4,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { IInvestorData } from "@interfaces/database";
 import { DateField, MarkdownField, Show, TextField } from "@refinedev/antd";
 import { useShow } from "@refinedev/core";
-import { Button, Image, Typography } from "antd";
+import { Button, Flex, Image, Space, Typography } from "antd";
 
 const { Title } = Typography;
 
@@ -14,7 +14,7 @@ export default function InvestorsShow() {
 
   const record = data?.data;
 
-  console.log(record)
+  console.log(record);
 
   return (
     <Show isLoading={isLoading}>
@@ -26,11 +26,18 @@ export default function InvestorsShow() {
       <TextField value={record?.publisher} />
       <Title level={5}>{"Summary"}</Title>
       <TextField value={`${record?.summary}`} />
-      <Button href={record?.document_line} icon={<DownloadOutlined />} />
-      <Title level={5}>{"Publication Date"}</Title>
-      <DateField value={record?.publication_date} />
-      <Title level={5}>{"CreatedAt"}</Title>
-      <DateField value={record?.$createdAt} />
+      <Flex gap={"large"} vertical={false}>
+        <Space direction="vertical" size={"small"}>
+          <Title level={5}>{"Publication Date"}</Title>
+          <DateField value={record?.publication_date} />
+        </Space>
+        <Space direction="vertical" size={"small"}>
+          <Title level={5}>{"CreatedAt"}</Title>
+          <DateField value={record?.$createdAt} />
+        </Space>
+      </Flex>
+      <Space />
+      <Button block href={record?.document_line} icon={<DownloadOutlined />} />
     </Show>
   );
 }
