@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 import { Layout, Typography, Row, Col, Card, Spin, Space, Button, Empty } from "antd";
 import { PRODUCTS_COLLECTION_ID } from "@constants/appWrite";
 
@@ -9,6 +9,7 @@ const { Title, Paragraph, Text } = Typography;
 
 const Marketplace = () => {
   // Use Refine's useList hook to fetch marketplace data
+  const {mutate} = useLogout()
   const { data, isLoading, error } = useList({
     resource: PRODUCTS_COLLECTION_ID, // This should match the collection name in Appwrite
   });
@@ -24,9 +25,12 @@ const Marketplace = () => {
   }
 
   if (error) {
+    mutate()
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Text type="danger">Failed to load products. Please try again later.</Text>
+        <small>Please wait a few seconds and  reload the page again</small>
+
       </div>
     );
   }

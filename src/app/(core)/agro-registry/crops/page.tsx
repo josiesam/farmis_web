@@ -22,7 +22,7 @@ import {
   Typography,
 } from "antd";
 import { CROPS_COLLECTION_ID, EVENTS_COLLECTION_ID } from "@constants/appWrite";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 
 const { Text } = Typography;
 
@@ -40,6 +40,7 @@ const App: React.FC = () => {
       pageSize: 100
     }
   });
+  const {mutate} = useLogout()
 
   // Handle loading and error states
   if (isLoading) {
@@ -133,10 +134,13 @@ const App: React.FC = () => {
   }
 
   if (error) {
+    mutate()
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Text type="danger">
           Failed to load products. Please try again later.
+          <small>Please wait a few seconds and reload the page again</small>
+
         </Text>
       </div>
     );

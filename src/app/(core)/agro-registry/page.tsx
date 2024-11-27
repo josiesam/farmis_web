@@ -1,7 +1,7 @@
 'use client';
 
 import { FARMERS_COLLECTION_ID } from "@constants/appWrite";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 import { Card, Col, Row, Space, Spin, Typography, Layout, Button } from "antd";
 import React from "react";
 
@@ -10,6 +10,8 @@ type Props = {};
 const { Title, Paragraph, Text } = Typography;
 
 const AgroRegistryPage = (props: Props) => {
+
+  const {mutate, isLoading} = useLogout()
   const {
     data,
     error,
@@ -29,10 +31,12 @@ const AgroRegistryPage = (props: Props) => {
   }
 
   if (error) {
+    mutate()
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Text type="danger">
           Failed to load farmers. Please try again later.
+          <small>Please reload the page again</small>
         </Text>
       </div>
     );

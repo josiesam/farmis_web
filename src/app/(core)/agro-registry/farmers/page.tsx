@@ -23,7 +23,7 @@ import {
   EVENTS_COLLECTION_ID,
   FARMERS_COLLECTION_ID,
 } from "@constants/appWrite";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 
 const { Text } = Typography;
 
@@ -37,6 +37,7 @@ const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
   const [current, setCurrent] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+  const {mutate} = useLogout()
   const { data, isLoading, error } = useList({
     resource: FARMERS_COLLECTION_ID!, // This should match the collection name in Appwrite
     pagination: {
@@ -141,6 +142,7 @@ const App: React.FC = () => {
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Text type="danger">
           Failed to load products. Please try again later.
+          <small>Please wait a few seconds and  reload the page again</small>
         </Text>
       </div>
     );
