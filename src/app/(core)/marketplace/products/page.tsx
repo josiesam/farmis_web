@@ -36,6 +36,9 @@ const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
   const { data, isLoading, error } = useList({
     resource: PRODUCTS_COLLECTION_ID, // This should match the collection name in Appwrite
+    pagination: {
+      pageSize: 100
+    }
   });
 
   // Handle loading and error states

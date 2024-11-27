@@ -35,7 +35,10 @@ const actions: React.ReactNode[] = [
 const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
   const { data, isLoading, error } = useList({
-    resource: CROPS_COLLECTION_ID! // This should match the collection name in Appwrite
+    resource: CROPS_COLLECTION_ID!, // This should match the collection name in Appwrite
+    pagination: {
+      pageSize: 100
+    }
   });
 
   // Handle loading and error states
@@ -155,7 +158,7 @@ const App: React.FC = () => {
                   style={{ width: 300,}}
                   actions={[
                     <Button key="eye" href="#" icon={<EyeOutlined  />} />,
-                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href="/marketplace/product/order" />
+                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href={`/marketplace/product/order/`} />
                   ]}
                 >
                   <Card.Meta

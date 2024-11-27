@@ -12,13 +12,17 @@ import {
   Col,
   Empty,
   Flex,
+  Pagination,
   Row,
   Space,
   Spin,
   Switch,
   Typography,
 } from "antd";
-import { EVENTS_COLLECTION_ID, FARMERS_COLLECTION_ID } from "@constants/appWrite";
+import {
+  EVENTS_COLLECTION_ID,
+  FARMERS_COLLECTION_ID,
+} from "@constants/appWrite";
 import { useList } from "@refinedev/core";
 
 const { Text } = Typography;
@@ -31,8 +35,14 @@ const actions: React.ReactNode[] = [
 
 const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
+  const [current, setCurrent] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
   const { data, isLoading, error } = useList({
-    resource: FARMERS_COLLECTION_ID! // This should match the collection name in Appwrite
+    resource: FARMERS_COLLECTION_ID!, // This should match the collection name in Appwrite
+    pagination: {
+      pageSize: pageSize,
+      current: current
+    }
   });
 
   // Handle loading and error states
@@ -40,87 +50,87 @@ const App: React.FC = () => {
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card
-            title={"Farmer"}
-            bordered={true}
-            loading={isLoading}
-            hoverable
-            style={{ borderColor: "#ff9f00", textAlign: "center" }}
-          >
-            <Space direction="vertical">
-              <Text>
-                <strong>Category:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Price:</strong> ${"N/A"}
-              </Text>
-              <Text>
-                <strong>Quantity Available:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Seller:</strong> {"Unknown"}
-              </Text>
-              <Button type="primary" size="small" href={`#`}>
-                View Details
-              </Button>
-            </Space>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card
-            title={"Farmer"}
-            bordered={true}
-            loading={isLoading}
-            hoverable
-            style={{ borderColor: "#ff9f00", textAlign: "center" }}
-          >
-            <Space direction="vertical">
-              <Text>
-                <strong>Category:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Price:</strong> ${"N/A"}
-              </Text>
-              <Text>
-                <strong>Quantity Available:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Seller:</strong> {"Unknown"}
-              </Text>
-              <Button type="primary" size="small" href={`#`}>
-                View Details
-              </Button>
-            </Space>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card
-            title={"Farmer"}
-            bordered={true}
-            loading={isLoading}
-            hoverable
-            style={{ borderColor: "#ff9f00", textAlign: "center" }}
-          >
-            <Space direction="vertical">
-              <Text>
-                <strong>Category:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Price:</strong> ${"N/A"}
-              </Text>
-              <Text>
-                <strong>Quantity Available:</strong> {"N/A"}
-              </Text>
-              <Text>
-                <strong>Seller:</strong> {"Unknown"}
-              </Text>
-              <Button type="primary" size="small" href={`#`}>
-                View Details
-              </Button>
-            </Space>
-          </Card>
-        </Col>
+          <Col xs={24} sm={12} md={8} lg={6}>
+            <Card
+              title={"Farmer"}
+              bordered={true}
+              loading={isLoading}
+              hoverable
+              style={{ borderColor: "#ff9f00", textAlign: "center" }}
+            >
+              <Space direction="vertical">
+                <Text>
+                  <strong>Category:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Price:</strong> ${"N/A"}
+                </Text>
+                <Text>
+                  <strong>Quantity Available:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Seller:</strong> {"Unknown"}
+                </Text>
+                <Button type="primary" size="small" href={`#`}>
+                  View Details
+                </Button>
+              </Space>
+            </Card>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={6}>
+            <Card
+              title={"Farmer"}
+              bordered={true}
+              loading={isLoading}
+              hoverable
+              style={{ borderColor: "#ff9f00", textAlign: "center" }}
+            >
+              <Space direction="vertical">
+                <Text>
+                  <strong>Category:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Price:</strong> ${"N/A"}
+                </Text>
+                <Text>
+                  <strong>Quantity Available:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Seller:</strong> {"Unknown"}
+                </Text>
+                <Button type="primary" size="small" href={`#`}>
+                  View Details
+                </Button>
+              </Space>
+            </Card>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={6}>
+            <Card
+              title={"Farmer"}
+              bordered={true}
+              loading={isLoading}
+              hoverable
+              style={{ borderColor: "#ff9f00", textAlign: "center" }}
+            >
+              <Space direction="vertical">
+                <Text>
+                  <strong>Category:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Price:</strong> ${"N/A"}
+                </Text>
+                <Text>
+                  <strong>Quantity Available:</strong> {"N/A"}
+                </Text>
+                <Text>
+                  <strong>Seller:</strong> {"Unknown"}
+                </Text>
+                <Button type="primary" size="small" href={`#`}>
+                  View Details
+                </Button>
+              </Space>
+            </Card>
+          </Col>
         </Row>
       </div>
     );
@@ -139,7 +149,19 @@ const App: React.FC = () => {
   // Extract events data
   const farmers = data?.data || [];
 
+  console.log(data);
+
   return (
+    <div>
+      <Pagination
+        total={data.total}
+        showTotal={(total, range) => `${range[0]}-${range[1]} farmers`}
+        defaultPageSize={10}
+        defaultCurrent={1}
+        align="end"
+        onChange={(page, pageSize) => {setCurrent(page); setPageSize(pageSize)}}
+      />
+      <Space size={'middle'} />
       <Row gutter={[16, 16]}>
         {farmers.length != 0 ? (
           <>
@@ -160,13 +182,10 @@ const App: React.FC = () => {
                     </Text>
                     <Text>
                       <strong>Location:</strong>{" "}
-                      {`${farmer.location.region}, ${farmer.location.district}` || "N/A"}
+                      {`${farmer.location.region}, ${farmer.location.district}` ||
+                        "N/A"}
                     </Text>
-                    <Button
-                      type="primary"
-                      size="small"
-                      href={`#`}
-                    >
+                    <Button type="primary" size="small" href={`#`}>
                       View Details
                     </Button>
                   </Space>
@@ -178,6 +197,7 @@ const App: React.FC = () => {
           <Empty style={{ marginInline: "auto" }} />
         )}
       </Row>
+    </div>
   );
 };
 

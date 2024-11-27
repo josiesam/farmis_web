@@ -194,7 +194,7 @@ export const refineResources: ResourceProps[] = [
     name: EVENTS_COLLECTION_ID!,
     list: '/dashboard/calendar/events',
     meta: {
-      label: 'calendar',
+      label: 'events',
       parent: 'events'
     }
   },
