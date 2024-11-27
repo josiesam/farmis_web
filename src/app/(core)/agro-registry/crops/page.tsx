@@ -158,7 +158,7 @@ const App: React.FC = () => {
                   style={{ width: 300,}}
                   actions={[
                     <Button key="eye" href="#" icon={<EyeOutlined  />} />,
-                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href={`/marketplace/product/order/`} />
+                    <Button key={"shoppingCart"} icon={<ShoppingCartOutlined />} href={`/marketplace/products/order/`} />
                   ]}
                 >
                   <Card.Meta
