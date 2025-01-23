@@ -8,7 +8,7 @@ export const AuthPage = (props: AuthPageProps) => {
       {...props}
       title={<ThemedTitleV2 text="FARMIS" collapsed={false} />}
       formProps={{
-        initialValues: { email: "demo@farmis.org", password: "demodemo" },
+        initialValues: { email: "demo@farmis.org", password: "SuperSecretPassword" },
       }}
     />
   );
