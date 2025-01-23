@@ -22,7 +22,7 @@ import {
   Typography,
 } from "antd";
 import { PRODUCTS_COLLECTION_ID } from "@constants/appWrite";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -34,8 +34,12 @@ const actions: React.ReactNode[] = [
 
 const App: React.FC = () => {
   // Use Refine's useList hook to fetch marketplace data
+  const {mutate} = useLogout()
   const { data, isLoading, error } = useList({
     resource: PRODUCTS_COLLECTION_ID, // This should match the collection name in Appwrite
+    pagination: {
+      pageSize: 100
+    }
   });
 
   // Handle loading and error states
@@ -130,10 +134,13 @@ const App: React.FC = () => {
   }
 
   if (error) {
+    mutate()
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
         <Text type="danger">
           Failed to load products. Please try again later.
+          <small>Please wait a few seconds and  reload the page again</small>
+
         </Text>
       </div>
     );

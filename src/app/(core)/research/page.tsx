@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { useList } from "@refinedev/core";
+import { useList, useLogout } from "@refinedev/core";
 import { Layout, Typography, Row, Col, Card, Spin, Space, Button } from "antd";
 import { RESEARCH_ARCHIVES_COLLECTION_ID } from "@constants/appWrite";
 
@@ -9,6 +9,7 @@ const { Title, Paragraph, Text } = Typography;
 
 const ResearchArchive = () => {
   // Use Refine's useList hook to fetch research data
+  const {mutate} = useLogout();
   const { data, isLoading, error } = useList({
     resource: RESEARCH_ARCHIVES_COLLECTION_ID, // This should match the collection name in Appwrite
   });

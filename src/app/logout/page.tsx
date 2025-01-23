@@ -13,6 +13,10 @@ const Logout = (props: Props) => {
   const { token } = theme.useToken();
   const translate = useTranslate();
 
+  useEffect(() => {
+    mutate()
+  }, [])
+
   const CardTitle = (
     <Typography.Title
       level={3}
@@ -49,17 +53,7 @@ const Logout = (props: Props) => {
             "0px 2px 4px rgba(0, 0, 0, 0.02), 0px 1px 6px -1px rgba(0, 0, 0, 0.02), 0px 1px 2px rgba(0, 0, 0, 0.03)",
         }}
       >
-        {isLoading ? <Spin tip="Loading..." size="large" /> : <></>}
-        <Button
-          block
-          color="primary"
-          onClick={() => {
-            mutate();
-          }}
-          disabled={isLoading}
-        >
-          Log out
-        </Button>
+        <Spin tip="Loading..." size="large" />
       </Card>
     </div>
     )} />

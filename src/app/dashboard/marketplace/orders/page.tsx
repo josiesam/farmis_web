@@ -20,14 +20,15 @@ export default function LocationList() {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-      <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => index+1}/>
+      <Table.Column dataIndex="id" title={"ID"} render={(value:any, record: any, index: number) => {console.log(record); return index+1} }/>
         <Table.Column
           dataIndex={["$createdAt"]}
           title={"Created at"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex={"transaction"} title={"Transaction ID"} />
-        <Table.Column dataIndex={'user'} title={'Buyer'}  render={(value) => `${value.user.name}`}/>
+        <Table.Column dataIndex={"transactionId"} title={"Transaction ID"} render={(value) => (`${value}` || "N/A")  }/>
+        <Table.Column dataIndex={'user'} title={'Buyer'}  render={(value) => `${value?.user?.name}` || "N/A"}/>
+        <Table.Column dataIndex={'farmer'} title={'Farmer'}  render={(value) => `${value?.product?.farmer?.name}` || "N/A"}/>
         <Table.Column dataIndex={"quantity"} title={'Quantity'}  />
         <Table.Column dataIndex={"total_price"} title={"Total Price"} render={(value) => `NLe ${value}`} />
         <Table.Column dataIndex={"status"} title={'Status'} />
