@@ -22,9 +22,7 @@ import {
   ORDERS_COLLECTION_ID,
   PRODUCTS_COLLECTION_ID,
 } from "@constants/appWrite";
-import { redirect, useRouter } from "next/navigation";
-import { ID } from "@refinedev/appwrite";
-import { title } from "process";
+import { useRouter } from "next/navigation";
 
 interface IFarmer {
   name: string;
@@ -41,7 +39,7 @@ interface Product {
 }
 
 type IUser = {
-  id: number;
+  $id: number;
   name: string;
   username: string;
   avatar: string;
@@ -58,21 +56,14 @@ interface OrderItem {
 
 const { Title } = Typography;
 
-// const products: Product[] = [
-//     {id: 1, name: "Rice", price: 50},
-//     {id: 2, name: "Cashew", price: 100},
-//     {id: 3, name: "Onion", price: 30},
-//     {id: 4, name: "Cocoa", price: 150},
-//     {id: 5, name: "Potato", price: 50},
-// ]
-
 function generateFiveDigit(): string {
   return Math.floor(10000 * Math.random() * 90000).toString();
 }
 
 function computeTotalAmount(items: OrderItem[]): number {
+  console.log(items)
   return items.reduce((total, item) => {
-    const itemTotal = item.product.price;
+    const itemTotal = item.product.price * item.quantity;
     return total + itemTotal;
   }, 0);
 }
@@ -84,7 +75,6 @@ const OrderProductPage = () => {
     resource: ORDERS_COLLECTION_ID!,
   });
   const [order, setOrder] = useState<OrderItem[]>([]);
-  const [totalAmount, setTotalAmount] = useState<number>(0);
   const { data: user } = useGetIdentity<IUser>();
   const {
     data: productData,
@@ -97,6 +87,8 @@ const OrderProductPage = () => {
     },
   });
 
+  
+  
   if (productIsLoading) {
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
@@ -104,7 +96,7 @@ const OrderProductPage = () => {
       </div>
     );
   }
-
+  
   if (productIsError) {
     return (
       <div style={{ textAlign: "center", padding: "50px" }}>
@@ -115,9 +107,9 @@ const OrderProductPage = () => {
     );
   }
 
+  const totalAmount = computeTotalAmount(order)
+  
   const products = productData.data || ([] as Product[]);
-
-  console.log(products);
 
   const updateOrder = (record: Product, value: number) => {
     console.log(record);
@@ -131,9 +123,6 @@ const OrderProductPage = () => {
         tempOrder = prevOrder.map((item) =>
           item.product.id === record.id ? { ...item, quantity: value } : item
         );
-        setTotalAmount((prev) => {
-          return computeTotalAmount(tempOrder);
-        });
         return [...tempOrder];
       } else {
         tempOrder = [
@@ -146,9 +135,6 @@ const OrderProductPage = () => {
             orderId: generateFiveDigit(),
           },
         ];
-        setTotalAmount((prev) => {
-          return computeTotalAmount(tempOrder);
-        });
         return tempOrder;
       }
     });
@@ -165,11 +151,12 @@ const OrderProductPage = () => {
       {
         resource: ORDERS_COLLECTION_ID!,
         values: filteredOrder.map((item) => {
+          console.log(item)
           return {
             total_price: item.product.price * item.quantity,
             quantity: item.quantity,
             orderId: item.orderId,
-            user: item?.user?.id || null,
+            user: item?.user?.$id || null,
             product: item.product.id
           };
         }),
@@ -186,32 +173,6 @@ const OrderProductPage = () => {
       }
     );
 
-    // createOrder(
-    //   {
-    //     resource: ORDERS_COLLECTION_ID!,
-    //     values: {
-    //       items: filteredOrder,
-    //       totalAmount: filteredOrder.reduce<number>((total, item) => {
-    //         const product = products.find(
-    //           (product: Product) => product.id === item.productId
-    //         );
-    //         if (product) {
-    //           return total + item.quantity * product.price;
-    //         }
-    //         return total;
-    //       }, 0),
-    //     },
-    //   },
-    //   {
-    //     onSuccess: () => {
-    //       message.success("Order placed successfully!");
-    //       redirect("/marketplace/products/transaction");
-    //     },
-    //     onError: () => {
-    //       message.error("Failed to place order. Please try again");
-    //     },
-    //   }
-    // );
   };
 
   const columns = [

@@ -116,7 +116,7 @@ const Marketplace = () => {
                   <Text>
                     <strong>Seller:</strong> {product.farmer.user.name || "Unknown"}
                   </Text>
-                  <Button type="primary" size="small" href={`/product/#`}>
+                  <Button type="primary" size="small" href={`/marketplace/products/order`}>
                     View Details
                   </Button>
                 </Space>
