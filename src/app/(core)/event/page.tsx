@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import { useList } from "@refinedev/core";
 import {
   Layout,
@@ -16,8 +16,8 @@ import {
   CalendarProps,
   Calendar,
 } from "antd";
-import { INVESTORS_COLLECTION_ID } from "@constants/appWrite";
-import { Dayjs } from "dayjs";
+import { EVENTS_COLLECTION_ID, INVESTORS_COLLECTION_ID } from "@constants/appWrite";
+import dayjs, { Dayjs } from "dayjs";
 import { info } from "console";
 
 const { Title, Paragraph, Text } = Typography;
@@ -64,31 +64,27 @@ const getMonthData = (value: Dayjs) => {
 };
 
 const EventsPage = () => {
-  // Use Refine's useList hook to fetch event data
-  // const { data, isLoading, error } = useList({
-  //   resource: INVESTORS_COLLECTION_ID, // This should match the collection name in Appwrite
-  // });
 
-  // // Handle loading and error states
-  // if (isLoading) {
-  //   return (
-  //     <div style={{ textAlign: "center", padding: "50px" }}>
-  //       <Spin size="large" />
-  //       <Text>Loading Events...</Text>
-  //     </div>
-  //   );
-  // }
 
-  // if (error) {
-  //   return (
-  //     <div style={{ textAlign: "center", padding: "50px" }}>
-  //       <Text type="danger">Failed to load events. Please try again later.</Text>
-  //     </div>
-  //   );
-  // }
 
-  // // Extract events data
-  // const events = data?.data || [];
+
+    const { data, isLoading, error } = useList({
+      resource: EVENTS_COLLECTION_ID!, // This should match the collection name in Appwrite
+    });
+
+  
+    if (isLoading) {
+      return (<Spin />)
+    }
+
+    if (error) {
+      return (<div>Error</div>)
+    }
+
+  const cellRender: CalendarProps<Dayjs>['cellRender'] = (current, info) => {
+    if (info.type === 'date') return dateCellRender(current);
+    if (info.type === 'month') return monthCellRender(current)
+  }
 
   const monthCellRender = (value: Dayjs) => {
     const num = getMonthData(value);
@@ -100,23 +96,23 @@ const EventsPage = () => {
     ) : null;
   };
 
-  const dateCellRender = (value: Dayjs) => {
-    const listData = getListData(value);
+  const dateCellRender = (value:Dayjs) => {
+    const stringValue = value.format("YYYY-MM-DD");
+    const listData = data.data.filter(({ date }) => 
+      dayjs(date).format("YYYY-MM-DD") === stringValue
+    );
+
     return (
-      <ul className="events">
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content}></Badge>
+      <ul className="events" style={{margin:0, padding:0, listStyle: 'none'}}>
+        {listData.map((item:any) => (
+          <li key={item.id}>
+            <Badge status={"success"} text={item.name} />
           </li>
         ))}
       </ul>
     );
-  };
 
-  const cellRender: CalendarProps<Dayjs>['cellRender'] = (current, info) => {
-    if (info.type === 'date') return dateCellRender(current);
-    if (info.type === 'month') return monthCellRender(current)
-  }
+  };
 
   return (
     <Layout style={{padding: "20px" }}>
@@ -153,41 +149,9 @@ const EventsPage = () => {
         </Title>
         <Calendar cellRender={cellRender} />
       </section>
-      {/* <section style={{ padding: "40px 20px" }}>
-        <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
-          Upcoming Events
-        </Title>
-        <Row gutter={[16, 16]}>
-          {events.map((event) => (
-            <Col key={event.id} xs={24} sm={12} md={8} lg={6}>
-              <Card
-                title={event.title}
-                bordered={true}
-                hoverable
-                style={{ borderColor: "#2a9d8f", textAlign: "center" }}
-              >
-                <Space direction="vertical">
-                  <Text>
-                    <strong>Date:</strong> {event.date || "TBA"}
-                  </Text>
-                  <Text>
-                    <strong>Location:</strong> {event.location || "Online"}
-                  </Text>
-                  <Text>
-                    <strong>Organizer:</strong> {event.organizer || "N/A"}
-                  </Text>
-                  <Paragraph>{event.description?.slice(0, 100)}...</Paragraph>
-                  <Button type="primary" size="small" href={`/events/${event.id}`} style={{ backgroundColor: "#264653" }}>
-                    RSVP Now
-                  </Button>
-                </Space>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </section> */}
     </Layout>
   );
 };
 
 export default EventsPage;
+

@@ -193,6 +193,8 @@ export const refineResources: ResourceProps[] = [
   {
     name: EVENTS_COLLECTION_ID!,
     list: '/dashboard/calendar/events',
+    create: 'dashboard/calendar/events/create',
+
     meta: {
       label: 'events',
       parent: 'events'
